@@ -7,6 +7,7 @@ var uglify = require('gulp-uglify');
 var autoprefixer = require('gulp-autoprefixer');
 var pkg = require('./package.json');
 var browserSync = require('browser-sync').create();
+var hash = require('gulp-hash');
 
 // Set the banner content
 var banner = ['/*!\n',
@@ -58,6 +59,7 @@ gulp.task('vendor', function() {
 // Compile SCSS
 gulp.task('css:compile', function() {
   return gulp.src('./scss/**/*.scss')
+    .pipe(hash())
     .pipe(sass.sync({
       outputStyle: 'expanded'
     }).on('error', sass.logError))
