@@ -1,8 +1,10 @@
+
+
 @mixin body-font() {
   font-family: 'Roboto', sans-serif;
 }
 
 @mixin heading-font() {
-  font-weight: 700;
-  font-family: 'Roboto Condensed', sans-serif;
+  /*font-weight: 700;*/
+  font-family: 'Open Sans', sans-serif;
 }

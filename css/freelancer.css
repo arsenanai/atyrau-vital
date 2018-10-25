@@ -14,8 +14,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 700;
-  font-family: 'Roboto Condensed', sans-serif;
+  /*font-weight: 700;*/
+  font-family: 'Open Sans', sans-serif;
 }
 
 hr.star-light,
@@ -106,8 +106,8 @@ section h2 {
 #mainNav {
   padding-top: 1rem;
   padding-bottom: 1rem;
-  font-weight: 700;
-  font-family: 'Roboto Condensed', sans-serif;
+  /*font-weight: 700;*/
+  font-family: 'Open Sans', sans-serif;
 }
 
 #mainNav .navbar-brand {
@@ -341,6 +341,10 @@ a {
 
 a:focus, a:hover, a:active {
   color: #596e2d;
+}
+
+.main-title {
+  color: #76923C;
 }
 
 .btn {
