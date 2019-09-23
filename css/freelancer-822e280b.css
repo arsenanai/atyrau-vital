@@ -1,6 +1,6 @@
 /*!
  * Start Bootstrap - Freelancer v5.0.0 (https://startbootstrap.com/template-overviews/freelancer)
- * Copyright 2013-2018 Start Bootstrap
+ * Copyright 2013-2019 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-freelancer/blob/master/LICENSE)
  */
 
@@ -61,6 +61,15 @@ hr.star-dark:after {
   background-color: white;
 }
 
+hr.color-primary {
+  border-color: #aed581 !important;
+}
+
+hr.color-primary:after {
+  color: #aed581 !important;
+  background-color: white;
+}
+
 section {
   padding: 6rem 0;
 }
@@ -101,6 +110,14 @@ section h2 {
   height: 3.5rem;
   background-color: rgba(33, 37, 41, 0.5);
   line-height: 3.1rem;
+}
+
+a.close-button.color-primary {
+  color: #aed581;
+}
+
+a.close-button.color-secondary {
+  color: #03A9F4;
 }
 
 #mainNav {
@@ -216,7 +233,7 @@ header.masthead h2 {
   -webkit-transition: all ease 0.5s;
   transition: all ease 0.5s;
   opacity: 0;
-  background-color: rgba(174, 213, 129, 0.9);
+  background-color: rgba(3, 169, 244, 0.9);
 }
 
 .portfolio .portfolio-item .portfolio-item-caption:hover {
@@ -225,6 +242,14 @@ header.masthead h2 {
 
 .portfolio .portfolio-item .portfolio-item-caption .portfolio-item-caption-content {
   font-size: 1.5rem;
+}
+
+.portfolio .portfolio-item .caption-primary {
+  background-color: rgba(174, 213, 129, 0.9);
+}
+
+.portfolio .portfolio-item .captio-secondary {
+  background-color: rgba(3, 169, 244, 0.9);
 }
 
 @media (min-width: 576px) {

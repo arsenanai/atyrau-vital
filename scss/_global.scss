@@ -54,6 +54,14 @@ hr.star-dark:after {
   background-color: white;
 }
 
+hr.color-primary {
+  border-color: $primary !important;
+}
+hr.color-primary:after {
+  color: $primary !important;
+  background-color: white;
+}
+
 // Section Padding Settings
 section {
   padding: 6rem 0;
@@ -95,4 +103,10 @@ section {
     background-color: fade-out($gray-900, 0.5);
     line-height: 3.1rem;
   }
+}
+a.close-button.color-primary{
+  color: $primary;
+}
+a.close-button.color-secondary{
+  color: $secondary;
 }

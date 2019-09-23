@@ -11,13 +11,20 @@
       -moz-transition: all ease 0.5s;
       transition: all ease 0.5s;
       opacity: 0;
-      background-color: fade-out($primary, .1);
+      background-color: fade-out($secondary, .1);
       &:hover {
         opacity: 1;
       }
       .portfolio-item-caption-content {
         font-size: 1.5rem;
       }
+    }
+    .caption-primary {
+      background-color: fade-out($primary, .1);
+    }
+
+    .captio-secondary{
+      background-color: fade-out($secondary, .1);
     }
   }
   @media (min-width: 576px) {
@@ -61,3 +68,4 @@
     }
   }
 }
+
