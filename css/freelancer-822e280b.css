@@ -49,15 +49,15 @@ hr.star-light {
 
 hr.star-light:after {
   color: #fff;
-  background-color: #5b6446;
+  background-color: #aed581;
 }
 
 hr.star-dark {
-  border-color: #aed581;
+  border-color: #5b6446;
 }
 
 hr.star-dark:after {
-  color: #aed581;
+  color: #5b6446;
   background-color: white;
 }
 
@@ -147,12 +147,10 @@ a.close-button.color-secondary {
 
 #mainNav .navbar-nav li.nav-item a.nav-link:active, #mainNav .navbar-nav li.nav-item a.nav-link:focus {
   color: #aed581;
-  background-color: transparent;
 }
 
 #mainNav .navbar-nav li.nav-item a.nav-link.active {
   color: #aed581;
-  background-color: transparent;
 }
 
 @media (min-width: 992px) {
@@ -195,7 +193,7 @@ a.close-button.color-secondary {
 @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
   .bg-navbar {
     backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(100px);
   }
 }
 
@@ -378,6 +376,10 @@ a:focus, a:hover, a:active {
   color: #404631;
 }
 
+a.text-primary:focus, a.text-primary:hover {
+  color: #76825b;
+}
+
 .btn {
   border-width: 2px;
 }
@@ -400,20 +402,20 @@ a:focus, a:hover, a:active {
 
 .btn-primary {
   background-color: #5b6446;
-  border-color: #5b6446;
+  border-color: #a8b291;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-  background-color: #404631;
+  background-color: #4d553c;
   border-color: #404631;
 }
 
 .btn-secondary {
   background-color: #aed581;
-  border-color: #aed581;
+  border-color: #f8fbf4;
 }
 
 .btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active {
-  background-color: #95c85b;
+  background-color: #a2cf6e;
   border-color: #95c85b;
 }

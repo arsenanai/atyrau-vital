@@ -2,7 +2,7 @@
   "use strict"; // Start of use strict
 
   var scroll = new SmoothScroll('a[href*="#"]', {
-    speed: 500
+    speed: 100
   });
 
   // Scroll to top button appear

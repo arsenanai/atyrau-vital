@@ -19,19 +19,16 @@
         &:active,
         &:focus {
           color: $secondary;
-          background-color: transparent;
         }
         &.active {
           color: $secondary;
-          background-color: transparent;
         }
       }
     }
   }
-  // .navbar-toggler {
-  //   font-size: 80%;
-  //   padding: 0.8rem;
-  // }
+  //.navbar-toggler, .navbar-toggler:hover, .navbar-toggler:focus {
+  //  background-color: transparent;
+  //}
 }
 @media(min-width:992px) {
   #mainNav {
@@ -75,7 +72,7 @@
 @supports (backdrop-filter: none) {
   .bg-navbar{
     backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(100px);
   }
 }
 // @media (min-width: 576px) {

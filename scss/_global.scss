@@ -43,14 +43,14 @@ hr.star-light {
 }
 hr.star-light:after {
   color: $white;
-  background-color: $primary;
+  background-color: $secondary;
 }
 
 hr.star-dark {
-  border-color: $secondary;
+  border-color: $primary;
 }
 hr.star-dark:after {
-  color: $secondary;
+  color: $primary;
   background-color: white;
 }
 
