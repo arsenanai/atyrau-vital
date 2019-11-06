@@ -190,8 +190,13 @@ a.close-button.color-secondary {
 .bg-navbar {
   background: radial-gradient(circle, #26862d 0%, #1b5e20 100%);
   opacity: 0.9;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+}
+
+@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+  .bg-navbar {
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+  }
 }
 
 header.masthead {
