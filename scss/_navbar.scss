@@ -5,6 +5,7 @@
   @include heading-font;
   .navbar-brand {
     color: $white;
+    font-size: 15px;
   }
   .navbar-nav {
     margin-top: 1rem;
@@ -13,22 +14,24 @@
       a.nav-link {
         color: $white;
         &:hover {
-          color: $primary;
+          color: darken($white, 10%);
         }
         &:active,
         &:focus {
-          color: $white;
+          color: $secondary;
+          background-color: transparent;
         }
         &.active {
-          color: $primary;
+          color: $secondary;
+          background-color: transparent;
         }
       }
     }
   }
-  .navbar-toggler {
-    font-size: 80%;
-    padding: 0.8rem;
-  }
+  // .navbar-toggler {
+  //   font-size: 80%;
+  //   padding: 0.8rem;
+  // }
 }
 @media(min-width:992px) {
   #mainNav {
@@ -38,7 +41,7 @@
     -moz-transition: padding-top 0.3s, padding-bottom 0.3s;
     transition: padding-top 0.3s, padding-bottom 0.3s;
     .navbar-brand {
-      font-size: 2em;
+      font-size: 1.5em;
       -webkit-transition: font-size 0.3s;
       -moz-transition: font-size 0.3s;
       transition: font-size 0.3s;
@@ -47,13 +50,13 @@
       margin-top: 0;
     }
     .navbar-nav > li.nav-item > a.nav-link.active {
-      color: $white;
-      background: $primary;
+      color: $secondary;
+      background-color: transparent;
       &:active,
       &:focus,
       &:hover {
-        color: $white;
-        background: $primary;
+        color: $secondary;
+        background-color: transparent;
       }
     }
   }
@@ -65,3 +68,27 @@
     }
   }
 }
+.bg-navbar{
+  background: radial-gradient(circle, lighten($thirdary,10%) 0%, $thirdary 100%);
+  opacity: 0.9;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+// @media (min-width: 576px) {
+  
+// }
+
+// // Medium devices (tablets, 768px and up)
+// @media (min-width: 768px) {
+  
+// }
+
+// // Large devices (desktops, 992px and up)
+// @media (min-width: 992px) {
+  
+// }
+
+// // Extra large devices (large desktops, 1200px and up)
+// @media (min-width: 1200px) {
+  
+// }
