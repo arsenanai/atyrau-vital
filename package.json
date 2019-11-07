@@ -26,14 +26,14 @@
         "url": "https://github.com/BlackrockDigital/startbootstrap-freelancer.git"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-free": "5.3.1",
+        "@fortawesome/fontawesome-free": "5.11.2",
         "bootstrap": "4.3.1",
         "jquery": "3.4.0",
         "jquery.easing": "^1.4.1",
         "magnific-popup": "^1.1.0"
     },
     "devDependencies": {
-        "browser-sync": "^2.26.3",
+        "browser-sync": "^2.26.7",
         "gulp": "^3.9.1",
         "gulp-autoprefixer": "6.0.0",
         "gulp-clean-css": "3.10.0",

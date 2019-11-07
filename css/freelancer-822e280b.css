@@ -6,6 +6,8 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1,
@@ -14,8 +16,7 @@ h3,
 h4,
 h5,
 h6 {
-  /*font-weight: 700;*/
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Rubik', sans-serif;
 }
 
 hr.star-light,
@@ -120,11 +121,55 @@ a.close-button.color-secondary {
   color: #aed581;
 }
 
+.solution-image {
+  width: 100%;
+  height: 150px;
+}
+
+.other-image {
+  width: 100%;
+  height: 275px;
+}
+
+.with-bg-image {
+  background-repeat: no-repeat, no-repeat;
+  background-position: center center;
+}
+
+.bg-contain {
+  background-size: contain;
+}
+
+.bg-cover {
+  background-size: cover;
+}
+
+.blur {
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+
+.brand-text {
+  /*background-image: linear-gradient(to bottom, $primary, lighten($primary, 30%));
+  color:transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;*/
+  text-shadow: 0px 0px 2px #eeeeee;
+}
+
+.hero-section {
+  background-image: url("img/misc/green wave.jpg");
+  background-repeat: no-repeat, no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
 #mainNav {
   padding-top: 1rem;
   padding-bottom: 1rem;
-  /*font-weight: 700;*/
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Rubik', sans-serif;
 }
 
 #mainNav .navbar-brand {
@@ -187,42 +232,19 @@ a.close-button.color-secondary {
 
 .bg-navbar {
   background: radial-gradient(circle, #26862d 0%, #1b5e20 100%);
-  opacity: 0.9;
-}
-
-@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-  .bg-navbar {
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(100px);
-  }
+  -webkit-filter: opacity(0.8);
+  filter: opacity(0.8);
 }
 
 header.masthead {
-  padding-top: calc(6rem + 72px);
-  padding-bottom: 6rem;
-}
-
-header.masthead h1 {
-  font-size: 3rem;
-  line-height: 3rem;
-}
-
-header.masthead h2 {
-  font-size: 1.3rem;
-  font-family: 'Roboto', sans-serif;
+  padding-top: calc(2rem + 72px);
+  padding-bottom: 1rem;
 }
 
 @media (min-width: 992px) {
   header.masthead {
     padding-top: calc(6rem + 106px);
     padding-bottom: 6rem;
-  }
-  header.masthead h1 {
-    font-size: 4.75em;
-    line-height: 4rem;
-  }
-  header.masthead h2 {
-    font-size: 1.75em;
   }
 }
 
@@ -377,7 +399,7 @@ a:focus, a:hover, a:active {
 }
 
 a.text-primary:focus, a.text-primary:hover {
-  color: #76825b;
+  color: #090a07 !important;
 }
 
 .btn {
@@ -396,8 +418,36 @@ a.text-primary:focus, a.text-primary:hover {
   color: #5b6446 !important;
 }
 
+.text-primary::-moz-selection,
+.text-primary *::-moz-selection {
+  color: #5b6446 !important;
+  background-color: #aed581 !important;
+}
+
+.text-primary::selection,
+.text-primary *::selection {
+  color: #5b6446 !important;
+  background-color: #aed581 !important;
+}
+
+.text-white::-moz-selection,
+.text-white *::-moz-selection {
+  color: white !important;
+  background-color: #1b5e20 !important;
+}
+
+.text-white::selection,
+.text-white *::selection {
+  color: white !important;
+  background-color: #1b5e20 !important;
+}
+
 .text-secondary {
   color: #aed581 !important;
+}
+
+.text-thirdary {
+  color: #1b5e20 !important;
 }
 
 .btn-primary {

@@ -8,7 +8,7 @@ a {
   }
 }
 a.text-primary:focus, a.text-primary:hover {
-  color: lighten($primary,10%);
+  color: darken($primary,30%) !important;
 }
 
 .btn {
@@ -26,9 +26,24 @@ a.text-primary:focus, a.text-primary:hover {
 .text-primary {
   color: $primary !important;
 }
+.text-primary::selection, 
+.text-primary *::selection{
+  color: $primary !important;
+  background-color: $secondary !important;
+}
+
+.text-white::selection, 
+.text-white *::selection, {
+  color: white !important;
+  background-color: $thirdary !important;
+}
 
 .text-secondary {
   color: $secondary !important;
+}
+
+.text-thirdary {
+  color: $thirdary !important;
 }
 
 .btn-primary {
