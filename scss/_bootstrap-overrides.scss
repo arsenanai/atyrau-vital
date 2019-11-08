@@ -20,7 +20,14 @@ a.text-primary:focus, a.text-primary:hover {
 }
 
 .bg-secondary {
-  background-color: $secondary !important;
+  background-image:
+    linear-gradient(
+      rgba(0,0,0, 0.33),
+      rgba(0,0,0, 0.33)
+    ),url('../img/misc/leaf-veins.jpg');
+  background-repeat: no-repeat, no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 
 .text-primary {

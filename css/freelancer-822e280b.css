@@ -8,6 +8,8 @@ body {
   font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url("../img/misc/ecailles.png");
+  background-repeat: repeat;
 }
 
 h1,
@@ -122,12 +124,10 @@ a.close-button.color-secondary {
 }
 
 .solution-image {
-  width: 100%;
-  height: 150px;
+  height: 200px;
 }
 
 .other-image {
-  width: 100%;
   height: 275px;
 }
 
@@ -150,20 +150,45 @@ a.close-button.color-secondary {
 }
 
 .brand-text {
-  /*background-image: linear-gradient(to bottom, $primary, lighten($primary, 30%));
-  color:transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-fill-color: transparent;*/
-  text-shadow: 0px 0px 2px #eeeeee;
+  color: white;
 }
 
-.hero-section {
-  background-image: url("img/misc/green wave.jpg");
+.hero {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.33)), to(rgba(0, 0, 0, 0.33))), url("../img/misc/forest&sea.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.33), rgba(0, 0, 0, 0.33)), url("../img/misc/forest&sea.jpg");
   background-repeat: no-repeat, no-repeat;
   background-position: center center;
   background-size: cover;
+  height: 100vh;
+}
+
+.hero {
+  position: relative;
+}
+
+.hero .container {
+  position: relative;
+  height: 100%;
+}
+
+.bottom-right {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-bottom: 1rem;
+  padding-right: 1rem;
+  margin-left: 1rem;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    height: 56.25vw;
+    max-height: 90vh;
+  }
+  .bottom-right {
+    padding-bottom: 3rem;
+    padding-right: 2rem;
+  }
 }
 
 #mainNav {
@@ -238,13 +263,11 @@ a.close-button.color-secondary {
 
 header.masthead {
   padding-top: calc(2rem + 72px);
-  padding-bottom: 1rem;
 }
 
 @media (min-width: 992px) {
   header.masthead {
     padding-top: calc(6rem + 106px);
-    padding-bottom: 6rem;
   }
 }
 
@@ -411,7 +434,11 @@ a.text-primary:focus, a.text-primary:hover {
 }
 
 .bg-secondary {
-  background-color: #aed581 !important;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.33)), to(rgba(0, 0, 0, 0.33))), url("../img/misc/leaf-veins.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.33), rgba(0, 0, 0, 0.33)), url("../img/misc/leaf-veins.jpg");
+  background-repeat: no-repeat, no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 
 .text-primary {
