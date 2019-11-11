@@ -434,11 +434,7 @@ a.text-primary:focus, a.text-primary:hover {
 }
 
 .bg-secondary {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.33)), to(rgba(0, 0, 0, 0.33))), url("../img/misc/leaf-veins.jpg");
-  background-image: linear-gradient(rgba(0, 0, 0, 0.33), rgba(0, 0, 0, 0.33)), url("../img/misc/leaf-veins.jpg");
-  background-repeat: no-repeat, no-repeat;
-  background-position: center center;
-  background-size: cover;
+  background-image: radial-gradient(#aed581, #a2cf6e, #95c85b);
 }
 
 .text-primary {

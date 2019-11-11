@@ -20,14 +20,10 @@ a.text-primary:focus, a.text-primary:hover {
 }
 
 .bg-secondary {
-  background-image:
-    linear-gradient(
-      rgba(0,0,0, 0.33),
-      rgba(0,0,0, 0.33)
-    ),url('../img/misc/leaf-veins.jpg');
-  background-repeat: no-repeat, no-repeat;
-  background-position: center center;
-  background-size: cover;
+  background-image: radial-gradient($secondary, darken($secondary,5%),darken($secondary,10%));
+  //background-image:
+  //  linear-gradient($secondary,$secondary),
+  //  url('../img/misc/leaf-veins.jpg');
 }
 
 .text-primary {
