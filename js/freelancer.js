@@ -2,7 +2,7 @@
   "use strict"; // Start of use strict
 
   var scroll = new SmoothScroll('a[href*="#"]', {
-    speed: 500
+    speed: 100
   });
 
   // Scroll to top button appear
@@ -30,8 +30,12 @@
   var navbarCollapse = function() {
     if ($("#mainNav").offset().top > 100) {
       $("#mainNav").addClass("navbar-shrink");
+      $("#mainNav").addClass("blur");
+      $("#mainNav").addClass("bg-navbar");
     } else {
       $("#mainNav").removeClass("navbar-shrink");
+      $("#mainNav").removeClass("blur");
+      $("#mainNav").removeClass("bg-navbar");
     }
   };
   // Collapse now if page is not at top
