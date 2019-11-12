@@ -1,6 +1,5 @@
 // Styling for the portfolio section
 .portfolio {
-  margin-bottom: -15px;
   .portfolio-item {
     position: relative;
     display: block;
@@ -25,12 +24,6 @@
 
     .captio-secondary{
       background-color: fade-out($secondary, .1);
-    }
-  }
-  @media (min-width: 576px) {
-    margin-bottom: -30px;
-    .portfolio-item {
-      margin-bottom: 30px;
     }
   }
 }

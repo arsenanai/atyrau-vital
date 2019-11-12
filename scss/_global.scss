@@ -5,7 +5,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-image:url('../img/misc/ecailles.png');
   background-repeat: repeat;
-
 }
 
 h1,
@@ -37,10 +36,6 @@ hr.star-dark:after {
   top: -.8em;
   display: inline-block;
   padding: 0 0.25em;
-  content: '\f57d';
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  font-size: 2em;
 }
 
 hr.star-light {
@@ -48,7 +43,6 @@ hr.star-light {
 }
 hr.star-light:after {
   color: $white;
-  background-color: $secondary;
 }
 
 hr.star-dark {
@@ -120,7 +114,7 @@ a.close-button.color-secondary{
   height:200px;
 }
 .other-image{
-  height:275px;
+  height:150px;
 }
 .with-bg-image{
   background-repeat: no-repeat, no-repeat;
@@ -141,14 +135,7 @@ a.close-button.color-secondary{
   //text-shadow: 0px 0px 2px #eeeeee;
 }
 .hero{
-  background-image:
-    linear-gradient(
-      rgba(0, 0, 0, 0.33),
-      rgba(0, 0, 0, 0.33)
-    ),url('../img/misc/forest&sea.jpg');
-  background-repeat: no-repeat, no-repeat;
-  background-position: center center;
-  background-size: cover;
+  
   height:100vh;
 }
 .hero{
@@ -166,6 +153,17 @@ a.close-button.color-secondary{
     padding-right:1rem;
     margin-left:1rem;
 }
+#contact-wrapper, .hero-wrapper, .wrapper{
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 0.33),
+      rgba(0, 0, 0, 0.33)
+    );
+}
+#contact-wrapper, .wrapper{
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
 @media (min-width: 768px) {
   .hero{
     height: 56.25vw;
@@ -175,4 +173,8 @@ a.close-button.color-secondary{
     padding-bottom:3rem;
     padding-right:2rem;
   }
+}
+
+.transparent-card{
+
 }

@@ -40,10 +40,6 @@ hr.star-dark:after {
   top: -.8em;
   display: inline-block;
   padding: 0 0.25em;
-  content: '\f57d';
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  font-size: 2em;
 }
 
 hr.star-light {
@@ -52,7 +48,6 @@ hr.star-light {
 
 hr.star-light:after {
   color: #fff;
-  background-color: #aed581;
 }
 
 hr.star-dark {
@@ -128,7 +123,7 @@ a.close-button.color-secondary {
 }
 
 .other-image {
-  height: 275px;
+  height: 150px;
 }
 
 .with-bg-image {
@@ -154,11 +149,6 @@ a.close-button.color-secondary {
 }
 
 .hero {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.33)), to(rgba(0, 0, 0, 0.33))), url("../img/misc/forest&sea.jpg");
-  background-image: linear-gradient(rgba(0, 0, 0, 0.33), rgba(0, 0, 0, 0.33)), url("../img/misc/forest&sea.jpg");
-  background-repeat: no-repeat, no-repeat;
-  background-position: center center;
-  background-size: cover;
   height: 100vh;
 }
 
@@ -178,6 +168,16 @@ a.close-button.color-secondary {
   padding-bottom: 1rem;
   padding-right: 1rem;
   margin-left: 1rem;
+}
+
+#contact-wrapper, .hero-wrapper, .wrapper {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.33)), to(rgba(0, 0, 0, 0.33)));
+  background-image: linear-gradient(rgba(0, 0, 0, 0.33), rgba(0, 0, 0, 0.33));
+}
+
+#contact-wrapper, .wrapper {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
 }
 
 @media (min-width: 768px) {
@@ -271,10 +271,6 @@ header.masthead {
   }
 }
 
-.portfolio {
-  margin-bottom: -15px;
-}
-
 .portfolio .portfolio-item {
   position: relative;
   display: block;
@@ -303,15 +299,6 @@ header.masthead {
 
 .portfolio .portfolio-item .captio-secondary {
   background-color: rgba(174, 213, 129, 0.9);
-}
-
-@media (min-width: 576px) {
-  .portfolio {
-    margin-bottom: -30px;
-  }
-  .portfolio .portfolio-item {
-    margin-bottom: 30px;
-  }
 }
 
 .portfolio-modal .portfolio-modal-dialog {
@@ -431,10 +418,6 @@ a.text-primary:focus, a.text-primary:hover {
 
 .bg-primary {
   background-color: #5b6446 !important;
-}
-
-.bg-secondary {
-  background-image: radial-gradient(#aed581, #a2cf6e, #95c85b);
 }
 
 .text-primary {

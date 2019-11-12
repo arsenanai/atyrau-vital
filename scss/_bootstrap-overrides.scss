@@ -19,13 +19,6 @@ a.text-primary:focus, a.text-primary:hover {
   background-color: $primary !important;
 }
 
-.bg-secondary {
-  background-image: radial-gradient($secondary, darken($secondary,5%),darken($secondary,10%));
-  //background-image:
-  //  linear-gradient($secondary,$secondary),
-  //  url('../img/misc/leaf-veins.jpg');
-}
-
 .text-primary {
   color: $primary !important;
 }
