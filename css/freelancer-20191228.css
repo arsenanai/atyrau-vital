@@ -475,3 +475,7 @@ a.text-primary:focus, a.text-primary:hover {
   background-color: #a2cf6e;
   border-color: #95c85b;
 }
+
+.titled-image-container{
+  width: 150px;
+}
