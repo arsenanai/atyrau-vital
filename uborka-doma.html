@@ -20,92 +20,710 @@
 
   <!-- Custom styles for this template -->
   <style type="text/css">
-  body {
-  font-family: 'Roboto', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  [v-cloak] > * { display:none }
+  [v-cloak]::before { content: "Жүктелуде…" }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Rubik', sans-serif;
-}
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: 'Rubik', sans-serif;
+    }
     body, #app{
       height: 100vh;
     }
     .hero{
-      height: 75vh;
+      position: relative;
+      background-image: url(img/calculator/house.webp);
+      background-repeat: no-repeat;
+      background-position: bottom center;
+      background-size: cover;
+      overflow: hidden;
     }
+    /*.round-bottom{
+      border-bottom-left-radius: 100% 60px;
+      border-bottom-right-radius: 100% 60px;
+    }*/
+    .rounded{
+      border-radius:0.25rem;
+    }
+    
     .offer-container{
-      padding-top:25vh;
+      /*padding-top:8vw;*/
+      padding-bottom: 1rem;
     }
-    .offer-text{
-      font-size:2.5rem;
+    .divan-container{
+      overflow:hidden;
     }
-    .offer-description{
+    .hero-bg-image{
+      position:absolute;
+      bottom:0px;
+    }
+    
+    .text-sm{
+      font-size:0.75rem;
+    }
+    .text-primary {
+        color: #5b6446 !important;
+    }
+    /* Small devices (landscape phones, 576px and up) */
+    h1{
+      font-size:2.25rem;
+    }
+    h2{
+      font-size:2rem;
+    }
+    h6{
       font-size:1rem;
     }
+    .phone{
+      font-size:1.5rem;
+    }
+    .modal-header{
+      border-bottom: 0px;
+    }
+    /*.how-we-clean li {
+        position: relative;
+        padding-left: 30px;
+        margin-bottom: 15px;
+    }*/
+    /*.how-we-clean li:before {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 0;
+        width: 23px;
+        height: 20px;
+        background: transparent url(img/calculator/check.svg) no-repeat 0 0;
+    }*/
+    .icon{
+      width:33px;
+      height:33px;
+    }
+    .m-t-minus40{
+      margin-top:0px;
+    }
+    .borderless{
+      border:0px;
+    }
+    .shine {
+      position: relative;
+      overflow: hidden;
+    }
+    .shine:after {
+      content:'';
+      top:0;
+      transform-origin: left;
+      transform: translate(50%, 50%) rotate(45deg);
+      width:100%;
+      height:100px;
+      position: absolute;
+      z-index:1;
+      animation: slide 2s infinite;
+      background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.1) 33%, rgba(255,255,255,0.3) 50%,rgba(128,186,232,0) 66%,rgba(125,185,232,0) 100%);
+    }
+    @keyframes slide {
+      0% {transform:translateX(-200%);}
+      100% {transform:translateX(200%);}
+    }
+
+    footer .footer-visa-mc {
+        width: 143px;
+    }
+
+    .collapse-enter-active, .collapse-leave-active {
+      transition: opacity .35s;
+    }
+    .collapse-enter, .collapse-leave-to {
+      opacity:0;
+    }
+
+    .remover{
+      cursor:pointer;
+      position:absolute;
+      right:2px;
+      top:5px;
+    }
+
+    /* Medium devices (tablets, 768px and up)*/
+    @media (min-width: 768px) {
+      h1{
+        font-size:2.5rem;
+      }
+      h2{
+        font-size:2.25rem;
+      }
+      h6{
+        font-size:1.05rem;
+      }
+      .m-t-minus40{
+        margin-top:-40px;
+      }
+    }
+    /* Large devices (desktops, 992px and up)*/
+    @media (min-width: 992px) {
+      h1{
+        font-size:3rem;
+      }
+      h2{
+        font-size:2.5rem;
+      }
+      h6{
+        font-size:1.1rem;
+      }
+      .m-t-minus40{
+        margin-top:-40px;
+      }
+    }
+
+    /* Extra large devices (large desktops, 1200px and up)*/
+    @media (min-width: 1200px) {
+      h1{
+        font-size:3.5rem;
+      }
+      h2{
+        font-size:3rem;
+      }
+      h6{
+        font-size:1.2rem;
+      }
+      .m-t-minus40{
+        margin-top:-40px;
+      }
+    }
+
+    /*large height screen*/
+    @media (min-height: 500px) {
+      .hero{
+        height: 100vh;
+      }
+      .modal-dialog{
+        height:90%;
+      }
+    }
+    
   </style>
 
 </head>
 
 <body id="page-top">
   <div id="app">
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg text-uppercase navbar-light bg-transparent">
-      <div class="container">
-        <a class="navbar-brand font-italic font-weight-bold text-capitalize text-dark" href="https://avgmltd.com">AVGM LTD</a>
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded " href="tel:">
-              <i class="fa fa-phone fa-2x d-inline-block d-sm-none"></i>
-              <span class="d-none d-sm-block">
-                +77001234567 
-              </span>
-              <small class="text-muted d-none d-sm-block">Ежедневно с 8 до 20</small>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <!-- Header -->
     <header class="hero text-left py-0">
+      <nav class="navbar navbar-expand-lg text-uppercase navbar-light bg-transparent">
         <div class="container">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="offer-container">
-                <h1 class="offer-text">Уборка частных домов в Атырау от 9000 тг</h1>
-                <h6 class="offer-description">Профессиональная генеральная уборка по стоимости частной домработницы</h6>
+          <a class="navbar-brand font-italic font-weight-bold text-capitalize text-dark" href="https://avgmltd.com">AVGM LTD</a>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item mx-0 mx-lg-1 py-0">
+              <a class="nav-link p-0 px-lg-3 rounded" href="tel:77001234567">
+                <i class="fa fa-phone fa-2x d-inline-block d-sm-none"></i>
+                <span class="phone d-none d-sm-block">
+                  +77001234567 
+                </span>
+                <small class="text-sm d-none d-sm-block">Ежедневно с 8 до 20</small>
+              </a>
+            </li>
+            <li class></li>
+          </ul>
+          <button class="btn btn-link ml-3" type="button" data-toggle="modal" data-target="#sidebarModal">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </nav>
+        <div class="container">
+          <div class="row mb-3 pb-3">
+            <div class="col-xl-10 col-lg-10 col-md-12 mb-3 pb-3">
+              <div class="offer-container mb-3 pb-3">
+                <h1>Уборка частных домов в Атырау от 9000 тг</h1>
+                <h6 class="w-50">Профессиональная генеральная уборка по стоимости частной домработницы</h6>
                 <br>
-                <button class="btn btn-outline-primary">
+                <a class="btn btn-success shine" href="#calculator">
                   Рассчитать стоимость уборки
-                </button>
+                </a>
               </div>
             </div>
           </div>
         </div>
     </header>
+    <section>
+      <div class="container py-3">
+        <h2 class="text-center my-3">Как мы делаем уборку</h2>
+        <div class="d-flex justify-content-center">
+          <div class="btn-group my-3" role="group" aria-label="">
+            <button type="button" class="btn btn-outline-success" data-target="#carousel1" data-slide-to="0"
+              :class="{active: selectedHow==0}" @click="selectedHow=0">в комнате</button>
+            <button type="button" class="btn btn-outline-success" data-target="#carousel1" data-slide-to="1"
+              :class="{active: selectedHow==1}" @click="selectedHow=1">на кухне</button>
+            <button type="button" class="btn btn-outline-success" data-target="#carousel1" data-slide-to="2"
+              :class="{active: selectedHow==2}" @click="selectedHow=2">в ванной</button>
+            </div>
+          </div>
+        <div id="carousel1" class="carousel slide" data-ride="carousel" data-interval="false">
+          <div class="carousel-inner how-we-clean">
+            <div class="carousel-item active">
+              <img class="w-100 d-none d-md-block rounded" src="img/calculator/howroom.webp">
+              <ul class="d-md-none fa-ul" style="height:339px">
+                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Протрём стеклянные поверхности и зеркала</li>
+                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Вытрем пыль с доступных поверхностей, включая подоконники и радиаторы</li>
+                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Застелим постель</li>
+                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Пропылесосим ковры и пол</li>
+                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Соберём и вынесем мусор</li>
+              </ul>
+            </div>
+            <div class="carousel-item">
+              <img class="w-100 d-none d-md-block rounded" v-show="selectedHow==1" src="img/calculator/howkitchen.webp">
+              <ul class="d-md-none fa-ul" style="height:339px">
+                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Протираем фасады шкафов, наводим порядок внутри</li>
+                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Моем грязную посуду, чистим раковину</li>
+                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Отмываем плиту</li>
+                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Протираем столешницы и наводим порядок</li>
+                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Моем пол и плинтусы, собираем и выкидываем мусор</li>
+                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Чистим духовку, микроволновку и холодильник снаружи и внутри</li>
+              </ul>
+            </div>
+            <div class="carousel-item">
+              <img class="w-100 d-none d-md-block rounded" v-show="selectedHow==2" src="img/calculator/howbathroom.webp">
+              <ul class="d-md-none fa-ul" style="height:339px">
+                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Протрём зеркала и стеклянные поверхности</li>
+                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Почистим раковину и смеситель</li>
+                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Почистим и продезинфицируем унитаз</li>
+                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Вымоем пол с плинтусами</li>
+                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Почистим ванную</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row d-flex align-items-end justify-content-center m-t-minus40">
+          <div class="col-md-4">
+            <div class="card bg-transparent borderless ">
+              <img src="img/calculator/tools.webp" class="w-75 bg-transparent card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text">Используем экологичные моющие средства и профессиональную клининговую технику</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card bg-transparent borderless ">
+              <img src="img/calculator/manager.webp" class="w-100 bg-transparent card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text">Клинеры работают под руководством опытного менеджера, который сдаёт вам работу</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card bg-transparent borderless ">
+              <img src="img/calculator/insurance.webp" class="w-75 bg-transparent card-img-top" alt="...">
+              <div class="card-body">
+                <p class="card-text">Прежде чем приступить к работе, страхуем ваше имущество на сумму пять миллион тенге на время работ</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="calculator" class="alert-success py-3 text-dark" v-cloak>
+      <div class="container">
+        <h2 class="text-center my-3">Расчет стоимости уборки</h2>
+        <div class="row mb-3 pb-3">
+          <div class="col-12 col-md-12 col-lg-8">
+              <div class="btn-group my-3" role="group" aria-label="">
+                <button type="button" class="btn btn-outline-success"
+                  :class="{active: selectedType==0}" @click="selectedType=0">Стандартная</button>
+                <button type="button" class="btn btn-outline-success"
+                  :class="{active: selectedType==1}" @click="selectedType=1">Генеральная</button>
+              </div>
+              <div v-show="selectedType==0">
+                  <div class="row mb-4">
+                    <div class="col-12 small" v-show="!showServicesList">
+                       <span>Наведем общий порядок, пропылесосим в комнатах, протрем зеркала, мебель, плинтусы, застелим постель, вымоем пол.</span> <a href="" class="text-success" @click.prevent="showServicesList=true">Весь список услуг</a>
+                    </div>
+                    <div class="col-12 small" v-show="showServicesList">
+                       <ul class="fa-ul">
+                          <li><span class="fa-li"><i class="fas fa-check-square text-success"></i></span>Соберём и вынесем мусор</li>
+                          <li><span class="fa-li"><i class="fas fa-check-square text-success"></i></span>Наведём порядок</li>
+                          <li><span class="fa-li"><i class="fas fa-check-square text-success"></i></span>Вытрем пыль с доступных поверхностей, включая подоконники и радиаторы</li>
+                          <li><span class="fa-li"><i class="fas fa-check-square text-success"></i></span>Протрём зеркала и стеклянные поверхности</li>
+                          <li><span class="fa-li"><i class="fas fa-check-square text-success"></i></span>Пропылесосим ковры и пол</li>
+                          <li><span class="fa-li"><i class="fas fa-check-square text-success"></i></span>Вымоем пол с плинтусами</li>
+                          <li><span class="fa-li"><i class="fas fa-check-square text-success"></i></span>Застелим постель</li>
+                          <li><span class="fa-li"><i class="fas fa-check-square text-success"></i></span>Вытрем пыль на фасадах кухни</li>
+                          <li><span class="fa-li"><i class="fas fa-check-square text-success"></i></span>Почистим столешницу, плиту, смеситель, раковину и рабочий рукав</li>
+                          <li><span class="fa-li"><i class="fas fa-check-square text-success"></i></span>Почистим ванную</li>
+                          <li><span class="fa-li"><i class="fas fa-check-square text-success"></i></span>Почистим и продезинфицируем унитаз</li>
+                          <li><span class="fa-li"><i class="fas fa-check-square text-success"></i></span>Вымоем лестницу</li>
+                       </ul>
+                       <a href="" class="text-success" @click.prevent="showServicesList=false">Свернуть</a>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 col-md-6 mb-3 mb-md-0">Выберите количество комнат
+                      <br>
+                        <div class="btn-group my-3" role="group" aria-label="">
+                          <button type="button" class="btn btn-outline-success"
+                            v-for="n in 5"
+                            :class="{active: roomsNumber==n}" @click="roomsNumber=n">{{n}}</button>
+                        </div>
+                    </div>
+                    <!---->
+                    <div class="col-12 col-md-6">и количество санузлов
+                      <br>
+                        <div class="btn-group my-3" role="group" aria-label="">
+                          <button type="button" class="btn btn-outline-success"
+                            v-for="n in 5"
+                            :class="{active: bathroomsNumber==n}" @click="bathroomsNumber=n">{{n}}</button>
+                        </div>
+                    </div>
+                  </div>
+                  <p class="mt-3">Дополнительные услуги</p>
+                  <div class="row">
+                    <div class="col-12 col-md-6" v-for="n in 2">
+                      <div class="my-2" v-for="(bonus,index) in bonuses.slice((n-1)*bonuses.length/2, (n-1)*bonuses.length/2 + bonuses.length/2)">
+                        <button class="btn btn-outline-default w-100 mb-1 py-1 d-flex align-items-center"
+                          @click="toggle(bonus)">
+                          <img class="icon mr-1" :src="bonus.image">
+                          {{bonus.name}}
+                        </button>
+                        <transition name="collapse">
+                            <div class="card card-body" v-if="(bonus.type=='number'&&bonus.value>0)||
+                            (bonus.type=='boolean'&&bonus.value==true)">
+                              <div class="input-group mb-3" v-if="bonus.type=='number'">
+                                <div class="input-group-prepend">
+                                  <button class="btn btn-outline-success" type="button" id="button-addon1" 
+                                  @click="bonus.value=bonus.value>2?bonus.value-bonus.step:bonus.step">
+                                    <i class="fas fa-minus"></i>
+                                  </button>
+                                </div>
+                                <span class="input-group-text">{{bonus.value}} шт.</span>
+                                <div class="input-group-append">
+                                  <button class="btn btn-outline-success" type="button" id="button-addon1"
+                                  @click="bonus.value+=bonus.step">
+                                    <i class="fas fa-plus"></i>
+                                  </button>
+                                </div>
+                              </div>
+                              <div class="small">
+                                {{bonus.description}}
+                              </div>
+                            </div>
+                        </transition>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <div v-show="selectedType==1">
+                
+              </div>
+          </div>
+          <form class="col-12 col-md-12 col-lg-4 text-dark">
+              <div class="card py-3 px-3">
+                  <form action="" method="post">
+                      <h4>Итого</h4>
+                      <div class="row py-2">
+                          <div class="col-12"><span class="text-muted">Основное</span></div>
+                          <div class="col-8"><span>комнат: {{roomsNumber}} <br>
+                              санузлов: {{bathroomsNumber}}
+                          </span></div>
+                          <div class="col-4 text-right">{{roomsPrice + (roomsNumber-1)*pricePerRoom + (bathroomsNumber-1)*pricePerBathroom}} тг</div>
+                      </div>
+                      <div class="row py-2" v-if="anyBonusSelected()">
+                        <div class="col-12"><span class="text-muted">
+                          Дополнительно</span>
+                        </div>
+                        <div class="col-12">
+                            <div class="row flex-nowrap" v-for="bonus in bonuses" 
+                            v-if="(bonus.type=='number'&&bonus.value>0)||
+                            (bonus.type=='boolean'&&bonus.value==true)">
+                               <div class="col-8">{{bonus.name}} <span v-if="bonus.type=='number'&&bonus.value>1">(x{{bonus.value}})</span></div>
+                               <div class="col-4 text-right text-dark pr-4">
+                                  {{bonus.value*bonus.price}} тг
+                                    <i class="fas fa-times fa-fw remover"
+                                      @click="bonus.value=0"></i>
+                                </div>
+                            </div>
+                         </div>
+                      </div>
+                      <div class="row pt-2">
+                          <hr class="mx-3 w-100">
+                          <div class="col-8"><span class="text-muted">К оплате</span></div>
+                          <div class="col-4 text-right"><strong class="pull-right">{{total()}} тг</strong></div>
+                      </div>
+                      <div class="row mt-3">
+                          <div class="col-12 mb-3">
+                              <label for="phone">Телефон</label>
+                              <input placeholder="+7 (___) ___-__-__" type="tel" id="phone" required="required" class="form-control" data-mask="+# (###) ###-##-##" data-previous-value="+2 (342) 345-32-45">
+                              
+                          </div>
+                          <div class="col-12 mb-3">
+                              <label for="card">Оплата</label>
+                              <div class="btn-group w-100" role="group" aria-label="">
+                                <button type="button" class="btn btn-outline-success"
+                                  :class="{active: cash==false}" @click="cash=false">Картой</button>
+                                <button type="button" class="btn btn-outline-success"
+                                  :class="{active: cash==true}" @click="cash=true">Наличными</button>
+                              </div>
+                          </div>
+                          <div class="col-12">
+                              <button type="submit" class="btn btn-primary w-100">Оформить заказ</button><small class="d-inline-block mt-2">Перезвоним уточнить детали</small></div>
+                      </div>
+                  </form>
+              </div>
+          </form>        
+        </div>
+      </div>
+    </section>
+    <section id="faq" class="py-3">
+      <div class="container">
+        <h2 class="text-center my-3">Часто задаваемые вопросы</h2>
+        <div class="row">
+          <div class="col">
+            <h3>Нужно ли мне присутствовать во время уборки?</h3>
+            <p>
+              Нет, ваше присутствие не требуется. Весь процесс уборки контролирует наш менеджер. Мы просим хозяев остаться, только если наводим порядок в гардеробе и шкафах с личными вещами.
+            </p>
+            <h3>Какой инвентарь и бытовую химию мне нужно для вас оставить?</h3>
+            <p>Ничего специально оставлять не нужно, у нас всё есть: стремянки, мопы, профессиональные пылесосы, парогенераторы, вот это всё.
 
-    
+            Для каждой поверхности или отделочного материала мы используем подходящее специализированное моющее средство. Все средства безвредны для людей и животных.
 
+            Если вы хотите, чтобы мы воспользовались какой-то специальной химией, попросите об этом менеджера.
+            </p>
+            <h3>Чем отличается стандартная уборка от генеральной?</h3>
+            <p>В стандартной уборке мы наводим порядок в более-менее незагрязнённом доме: вытираем пыль, моем молы. При генеральной уборке перед наведением порядка в доме отмывается каждый уголок. Даже если он не очень этого хочет.
+            </p>
+            <h3>Могу ли я заказать уборку части дома?</h3>
+            <p>Конечно, мы наведём порядок там, где вы попросите. И если вы уже на месте решите донавести порядок везде — так мы тоже можем.
+            </p>
+            <h3>Как я могу оплатить ваши услуги?</h3>
+            <p>Мы принимаем оплату картами и наличными. Вы платите в конце уборки, когда приняли её и вам всё понравилось. В случае оплаты на сайте, мы блокируем на вашей карте необходимую сумму и спишем её в течение часа после уборки.
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer>
+        <div class="container my-5">
+            <div class="row text-center text-md-left">
+                <div class="col-12">
+                    <hr>
+                </div>
+                <div class="col-12 col-md-4 mb-3">
+                    © ТОО «AVGM LTD», 2020 </div>
+                <div class="col-12 col-md-4 mb-3">
+                    <p class="mb-2">
+                        г. Атырау Южная Пром Зона 4, РК
+                    </p>
+                    <ul class="list-unstyled">
+                        <li class="list-item mb-2"><a class="text-success" href="mailto:ut.or.2017@gmail.com">ut.or.2017@gmail.com</a></li>
+                        <li class="list-item mb-2"><a class="text-success" href="tel:+77122457525">+7 7122 45 75 25</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-4 mb-3">
+
+                    <ul class="list-unstyled">
+                        <li class="list-item mb-2">
+                            <a class="text-success" href="/himchistka-mebeli-kovrov">Химчистка мягкой мебели и ковров в Алматы</a> </li>
+                        <li class="list-item mb-2">
+                            <a class="text-success" href="/oplata">Оплата</a> </li>
+                        <li class="list-item mb-2">
+                            <a class="text-success" href="/skidki-i-aktsii">Скидки и акции</a> </li>
+                        <li class="list-item mb-2">
+                            <a class="text-success" href="/stoimost-uslug-uborki-i-himchistki-myagkoj-mebeli-v-almaty">Прайс-лист услуг</a> </li>
+                        <li class="list-item mb-2">
+                            <a class="text-success" href="/otzyvy-i-rekomendatsii">Отзывы и рекомендации</a> </li>
+                    </ul>
+
+                    Принимаем карты
+                    <br>
+                    <img src="img/calculator/visa-mc.webp" class="footer-visa-mc mt-1" alt="">
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="modal fade" id="sidebarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm mr-0 mt-0" role="document">
+        <div class="modal-content navbar navbar-light bg-light h-100">
+          <div class="modal-header w-100">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body p-0 navbar-collapse">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="">Уборка квартир в Атырау от 6500 тг</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="">Уборка частных домов в Атырау от 9000 тг</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="">Уборка после ремонта в квартирах, домах и офисах Атырау</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="">Уборка офисов в Атырау</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="">Химчистка мягкой мебели и ковров в Атырау</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="scroll-to-top d-lg-none position-fixed ">
       <a class=" d-block text-center text-white rounded" href="#page-top">
         <i class="fa fa-chevron-up"></i>
       </a>
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
   <script type="text/javascript">
     var app = new Vue({
       el: '#app',
       data: {
-
-      }
+        selectedHow:0,
+        selectedType:0,
+        showServicesList:false,
+        roomsNumber:1,
+        bathroomsNumber:1,
+        roomsPrice:9000,
+        pricePerRoom:2000,
+        pricePerBathroom:1000,
+        cash:true,
+        bonuses:[
+          {
+            name: 'Холодильник',
+            image: 'img/calculator/fridge.svg',
+            type:'number',
+            value:0,
+            step:1,
+            description:'Вымоем снаружи и внутри, выкинем пропавшее. Морозильную камеру размораживает клиент.',
+            price:1500,
+          },
+          {
+            name: 'Духовка',
+            image: 'img/calculator/oven.svg',
+            type:'boolean',
+            value:false,
+            description:'Вымоем снаружи и внутри.',
+            price:1500,
+          },
+          {
+            name: 'Посуда',
+            image: 'img/calculator/plate.svg',
+            type:'boolean',
+            value:false,
+            price:1000,
+            description:'Помоем всю грязную посуду, высушим и аккуратно расставим.',
+          },
+          {
+            name: 'Глажка',
+            image: 'img/calculator/laundry.svg',
+            type:'number',
+            value:0,
+            step:10,
+            price:1400,
+            description:'Погладим всё, что оставите, кроме нижнего белья и верхней одежды.',
+          },
+          {
+            name: 'Питомец',
+            image: 'img/calculator/cat.svg',
+            type:'number',
+            value:0,
+            step:1,
+            price:1000,
+            description:'Почистим и продезинфицируем лоток, сменим наполнитель, помоем мисочки.',
+          },
+          //
+          {
+            name: 'Кухонные шкафы',
+            image: 'img/calculator/kitchen.svg',
+            type:'number',
+            value:0,
+            step:1,
+            price:1200,
+            description:'Вымоем снаружи и внутри, наведём порядок.',
+          },
+          {
+            name: 'Окна',
+            image: 'img/calculator/window.svg',
+            type:'number',
+            value:0,
+            step:1,
+            price:1000,
+            description:'Вымоем снаружи и внутри, включая рамы, торцы и подоконник. Одно окно — 2-3 секции общей площадью ~3 кв. м.',
+          },
+          {
+            name: 'Шкафы',
+            image: 'img/calculator/cupboard.svg',
+            type:'number',
+            value:0,
+            step:1,
+            price:1600,
+            description:'Вымоем снаружи и внутри, наведём порядок, аккуратно сложим вещи. Делаем только в присутствии клиента.',
+          },
+          {
+            name: 'Балкон',
+            image: 'img/calculator/balcony.svg',
+            type:'number',
+            value:0,
+            step:1,
+            price:1900,
+            description:'Наведём порядок, вымоем полы и стены. Окна считаем отдельно.',
+          },
+          {
+            name: 'Микроволновка',
+            image: 'img/calculator/microwave.svg',
+            type:'number',
+            value:0,
+            step:1,
+            price:700,
+            description:'Вымоем снаружи и внутри',
+          },
+        ],
+      },
+      methods:{
+        anyBonusSelected: function(){
+          var result = false
+          var bonus
+          for(var i=0;i<this.bonuses.length;i++){
+            bonus = this.bonuses[i]
+            if((bonus.type=='number'&&bonus.value>0) ||
+              (bonus.type=='boolean'&&bonus.value==true)
+              ){
+              result = true
+              break
+            }
+          }
+          return result
+        },
+        toggle: function(bonus){
+          if(bonus.type=='number'){
+            bonus.value=(bonus.value>0?0:bonus.step);
+          }else{
+            bonus.value = !bonus.value
+          }
+        },
+        totalFromBonuses: function(){
+          var result = 0
+          this.bonuses.forEach((bonus)=>{
+            result += bonus.value*bonus.price
+          })
+          return result
+        },
+        total(){
+          return this.roomsPrice + (this.roomsNumber-1)*this.pricePerRoom + (this.bathroomsNumber-1)*this.pricePerBathroom +this.totalFromBonuses()
+        },
+      },
     })
   </script>
   <!-- Bootstrap core JavaScript -->
