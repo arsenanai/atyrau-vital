@@ -217,17 +217,17 @@
 </head>
 
 <body id="page-top">
-  <div id="app">
+  <div id="app" v-cloak>
     <header class="hero text-left py-0">
       <nav class="navbar navbar-expand-lg text-uppercase navbar-light bg-transparent">
         <div class="container">
           <a class="navbar-brand font-italic font-weight-bold text-capitalize text-dark" href="https://avgmltd.com">AVGM LTD</a>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item mx-0 mx-lg-1 py-0">
-              <a class="nav-link p-0 px-lg-3 rounded" href="tel:77001234567">
+              <a class="nav-link p-0 px-lg-3 rounded" :href="'tel:'+phones[0]">
                 <i class="fa fa-phone fa-2x d-inline-block d-sm-none"></i>
                 <span class="phone d-none d-sm-block">
-                  +77001234567 
+                  {{formatPhoneNumber(phones[0])}}
                 </span>
                 <small class="text-sm d-none d-sm-block">Ежедневно с 8 до 20</small>
               </a>
@@ -523,8 +523,8 @@
                         г. Атырау Южная Пром Зона 4, РК
                     </p>
                     <ul class="list-unstyled">
-                        <li class="list-item mb-2"><a class="text-success" href="mailto:ut.or.2017@gmail.com">ut.or.2017@gmail.com</a></li>
-                        <li class="list-item mb-2"><a class="text-success" href="tel:+77122457525">+7 7122 45 75 25</a></li>
+                        <li class="list-item mb-2"><a class="text-success" :href="'mailto:'+emails[0]">{{emails[0]}}</a></li>
+                        <li class="list-item mb-2"><a class="text-success" :href="'tel:'+phones[0]">{{formatPhoneNumber(phones[0])}}</a></li>
                     </ul>
                 </div>
                 <div class="col-12 col-md-4 mb-3">
@@ -590,6 +590,8 @@
     var app = new Vue({
       el: '#app',
       data: {
+        phones: ['+77122457525',],
+        emails: ['ut.or.2017@gmail.com'],
         selectedHow:0,
         selectedType:0,
         showServicesList:false,
@@ -722,6 +724,15 @@
         },
         total(){
           return this.roomsPrice + (this.roomsNumber-1)*this.pricePerRoom + (this.bathroomsNumber-1)*this.pricePerBathroom +this.totalFromBonuses()
+        },
+        formatPhoneNumber(phoneNumberString) {
+          var cleaned = ('' + phoneNumberString).replace(/\D/g, '')
+          var match = cleaned.match(/^(7|)?(\d{3})(\d{3})(\d{4})$/)
+          if (match) {
+            var intlCode = (match[1] ? '+7 ' : '')
+            return [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('')
+          }
+          return null
         },
       },
     })
