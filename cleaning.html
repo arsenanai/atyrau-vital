@@ -5,12 +5,12 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content='ТОО «Atyrau Vital Global Mote LTD» занимается экологическим аутсорсингом. Мы предлагаем Вам свои услуги: аэродинамические испытания, вентиляция, строительство, сервис и услуги монтажа, утилизация распределение отходов, обслуживание электрика, системы кондиционирования, комплексное обслуживание объектов клининг. Атырау'>
-  <meta name="keywords" content="Атырау,клининг,Atyrau,Vital,Global,Mote,LTD,ТОО,экологический,аутсорсинг,аэродинамические,испытания,вентиляция,строительство,сервис,услуги,монтаж,отход,электрик,кондиционирован">
+  <meta name="description" content='Уборка домов, квартир, офисов или после ремонта в Атырау'>
+  <meta name="keywords" content="клининг,уборка,квартир,домов,офисов,ремонта,после,Атырау">
   <meta name="author" content="">
   <meta name="google-site-verification" content="N973lsxBSqpq2NMYliXCc1w5FJR4Uo2ckU5B0QgZ84w" />
 
-  <title>Многопрофильная компания Atyrau Vital Global Mote LTD</title>
+  <title>AVGM</title>
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -44,16 +44,15 @@
     }
     .hero{
       position: relative;
-      background-image: url(img/calculator/house.webp);
       background-repeat: no-repeat;
-      background-position: bottom center;
+      background-position: center center;
       background-size: cover;
       overflow: hidden;
     }
-    /*.round-bottom{
-      border-bottom-left-radius: 100% 60px;
-      border-bottom-right-radius: 100% 60px;
-    }*/
+    .filter-light{
+      background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.33)), to(rgba(255, 255, 255, 0.33)));
+      background-image: linear-gradient(rgba(255, 255, 255, 0.33), rgba(255, 255, 255, 0.33));
+    }
     .rounded{
       border-radius:0.25rem;
     }
@@ -213,37 +212,40 @@
     }
     
   </style>
-
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
 </head>
 
 <body id="page-top">
   <div id="app" v-cloak>
-    <header class="hero text-left py-0">
-      <nav class="navbar navbar-expand-lg text-uppercase navbar-light bg-transparent">
-        <div class="container">
-          <a class="navbar-brand font-italic font-weight-bold text-capitalize text-dark" href="https://avgmltd.com">AVGM LTD</a>
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item mx-0 mx-lg-1 py-0">
-              <a class="nav-link p-0 px-lg-3 rounded" :href="'tel:'+phones[0]">
-                <i class="fa fa-phone fa-2x d-inline-block d-sm-none"></i>
-                <span class="phone d-none d-sm-block">
-                  {{formatPhoneNumber(phones[0])}}
-                </span>
-                <small class="text-sm d-none d-sm-block">Ежедневно с 8 до 20</small>
-              </a>
-            </li>
-            <li class></li>
-          </ul>
-          <button class="btn btn-link ml-3" type="button" data-toggle="modal" data-target="#sidebarModal">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        </div>
-      </nav>
+    <header class="hero text-left py-0" :style="'background-image: url(img/calculator/'+selectedPage+'.webp)'">
+      <div class="w-100 h-100 filter-light">
+        <nav class="navbar navbar-expand-lg text-uppercase navbar-light bg-transparent">
+          <div class="container">
+            <a class="navbar-brand font-italic font-weight-bold text-capitalize text-dark" href="https://avgmltd.com">AVGM LTD</a>
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item mx-0 mx-lg-1 py-0">
+                <a class="nav-link p-0 px-lg-3 rounded" :href="'tel:'+phones[0]">
+                  <i class="fa fa-phone fa-2x d-inline-block d-sm-none"></i>
+                  <span class="phone d-none d-sm-block">
+                    {{formatPhoneNumber(phones[0])}}
+                  </span>
+                  <small class="text-sm d-none d-sm-block">Ежедневно с 8 до 20</small>
+                </a>
+              </li>
+              <li class></li>
+            </ul>
+            <button class="btn btn-link ml-3" type="button" data-toggle="modal" data-target="#sidebarModal">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+        </nav>
         <div class="container">
           <div class="row mb-3 pb-3">
             <div class="col-xl-10 col-lg-10 col-md-12 mb-3 pb-3">
               <div class="offer-container mb-3 pb-3">
-                <h1>Уборка частных домов в Атырау от 9000 тг</h1>
+                <h1>
+                  {{printOffer(selectedPage)}}
+                </h1>
                 <h6 class="w-50">Профессиональная генеральная уборка по стоимости частной домработницы</h6>
                 <br>
                 <a class="btn btn-success shine" href="#calculator">
@@ -253,51 +255,26 @@
             </div>
           </div>
         </div>
+      </div>
     </header>
     <section>
       <div class="container py-3">
         <h2 class="text-center my-3">Как мы делаем уборку</h2>
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center" v-if="getTodos().length>1">
           <div class="btn-group my-3" role="group" aria-label="">
-            <button type="button" class="btn btn-outline-success" data-target="#carousel1" data-slide-to="0"
-              :class="{active: selectedHow==0}" @click="selectedHow=0">в комнате</button>
-            <button type="button" class="btn btn-outline-success" data-target="#carousel1" data-slide-to="1"
-              :class="{active: selectedHow==1}" @click="selectedHow=1">на кухне</button>
-            <button type="button" class="btn btn-outline-success" data-target="#carousel1" data-slide-to="2"
-              :class="{active: selectedHow==2}" @click="selectedHow=2">в ванной</button>
+            <button type="button" class="btn btn-outline-success" data-target="#carousel1" :data-slide-to="index"
+              :class="{active: selectedHow==index}" @click="selectedHow=index"
+                v-for="(todo,index) in getTodos()">{{todo.title}}</button>
             </div>
           </div>
         <div id="carousel1" class="carousel slide" data-ride="carousel" data-interval="false">
           <div class="carousel-inner how-we-clean">
-            <div class="carousel-item active">
-              <img class="w-100 d-none d-md-block rounded" src="img/calculator/howroom.webp">
+            <div class="carousel-item" v-for="(todo,index) in getTodos()" :class="{'active':index==0}">
+              <img class="w-100 d-none d-md-block rounded" :src="'img/calculator/'+todo.image">
               <ul class="d-md-none fa-ul" style="height:339px">
-                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Протрём стеклянные поверхности и зеркала</li>
-                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Вытрем пыль с доступных поверхностей, включая подоконники и радиаторы</li>
-                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Застелим постель</li>
-                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Пропылесосим ковры и пол</li>
-                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Соберём и вынесем мусор</li>
-              </ul>
-            </div>
-            <div class="carousel-item">
-              <img class="w-100 d-none d-md-block rounded" v-show="selectedHow==1" src="img/calculator/howkitchen.webp">
-              <ul class="d-md-none fa-ul" style="height:339px">
-                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Протираем фасады шкафов, наводим порядок внутри</li>
-                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Моем грязную посуду, чистим раковину</li>
-                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Отмываем плиту</li>
-                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Протираем столешницы и наводим порядок</li>
-                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Моем пол и плинтусы, собираем и выкидываем мусор</li>
-                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Чистим духовку, микроволновку и холодильник снаружи и внутри</li>
-              </ul>
-            </div>
-            <div class="carousel-item">
-              <img class="w-100 d-none d-md-block rounded" v-show="selectedHow==2" src="img/calculator/howbathroom.webp">
-              <ul class="d-md-none fa-ul" style="height:339px">
-                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Протрём зеркала и стеклянные поверхности</li>
-                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Почистим раковину и смеситель</li>
-                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Почистим и продезинфицируем унитаз</li>
-                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Вымоем пол с плинтусами</li>
-                <li><span class="fa-li"><i class="fas fa-check text-success"></i></span>Почистим ванную</li>
+                <li v-for="(te,index) in todo.text"><span class="fa-li"><i class="fas fa-check text-success"></i></span>
+                  {{te}}
+                </li>
               </ul>
             </div>
           </div>
@@ -432,7 +409,7 @@
                           <div class="col-8"><span>комнат: {{roomsNumber}} <br>
                               санузлов: {{bathroomsNumber}}
                           </span></div>
-                          <div class="col-4 text-right">{{roomsPrice + (roomsNumber-1)*pricePerRoom + (bathroomsNumber-1)*pricePerBathroom}} тг</div>
+                          <div class="col-4 text-right">{{initialPrices[selectedPage] + (roomsNumber-1)*pricePerRoom + (bathroomsNumber-1)*pricePerBathroom}} тг</div>
                       </div>
                       <div class="row py-2" v-if="anyBonusSelected()">
                         <div class="col-12"><span class="text-muted">
@@ -530,8 +507,8 @@
                 <div class="col-12 col-md-4 mb-3">
 
                     <ul class="list-unstyled">
-                        <li class="list-item mb-2">
-                            <a class="text-success" href="/himchistka-mebeli-kovrov">Химчистка мягкой мебели и ковров в Алматы</a> </li>
+                        <!--<li class="list-item mb-2">
+                            <a class="text-success" href="/himchistka-mebeli-kovrov">Химчистка мягкой мебели и ковров в Алматы</a> </li>-->
                         <li class="list-item mb-2">
                             <a class="text-success" href="/oplata">Оплата</a> </li>
                         <li class="list-item mb-2">
@@ -559,21 +536,15 @@
           </div>
           <div class="modal-body p-0 navbar-collapse">
             <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="">Уборка квартир в Атырау от 6500 тг</a>
+              <li class="nav-item" 
+                v-for="page in pages">
+                <a class="nav-link" 
+                  :class="{'active':selectedPage==page}"
+                  :href="'/cleaning.html?in='+page">{{printOffer(page)}}</a>
               </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="">Уборка частных домов в Атырау от 9000 тг</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="">Уборка после ремонта в квартирах, домах и офисах Атырау</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="">Уборка офисов в Атырау</a>
-              </li>
-              <li class="nav-item">
+              <!--<li class="nav-item">
                 <a class="nav-link" href="">Химчистка мягкой мебели и ковров в Атырау</a>
-              </li>
+              </li>-->
             </ul>
           </div>
         </div>
@@ -585,19 +556,159 @@
       </a>
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
   <script type="text/javascript">
     var app = new Vue({
       el: '#app',
       data: {
+        selectedPage:'house',
+        pages:['house','apartment','office','renovation'],
+        offers:{
+          house:{
+            value: 'Уборка домов в Атырау от ',
+            withPrice:true
+          },
+          apartment:{
+            value: 'Уборка квартир в Атырау от ',
+            withPrice:true
+          },
+          office:{
+            value: 'Уборка офисов в Атырау',
+            withPrice:false
+          },
+          renovation:{
+            value: 'Уборка после ремонта в квартирах, домах и офисах Атырау',
+            withPrice:false
+          },
+        },
         phones: ['+77122457525',],
         emails: ['ut.or.2017@gmail.com'],
+        todos:{
+          //0 - house, apartment
+          house:[
+            //00 - room
+            {
+              image: 'howroom.webp',
+              title: 'в комнате',
+              text:[
+                'Протрём стеклянные поверхности и зеркала',
+                'Вытрем пыль с доступных поверхностей, включая подоконники и радиаторы',
+                'Застелим постель',
+                'Пропылесосим ковры и пол',
+                'Соберём и вынесем мусор',
+              ],
+            },
+            // 01 kitchen
+            {
+              image: 'howkitchen.webp',
+              title: 'на кухне',
+              text:[
+                'Протираем фасады шкафов, наводим порядок внутри',
+                'Моем грязную посуду, чистим раковину',
+                'Отмываем плиту',
+                'Протираем столешницы и наводим порядок',
+                'Моем пол и плинтусы, собираем и выкидываем мусор',
+                'Чистим духовку, микроволновку и холодильник снаружи и внутри',
+              ],
+            },
+            // 02 bathroom
+            {
+              image: 'howbathroom.webp',
+              title: 'в ванной',
+              text:[
+                'Протрём зеркала и стеклянные поверхности',
+                'Почистим раковину и смеситель',
+                'Почистим и продезинфицируем унитаз',
+                'Вымоем пол с плинтусами',
+                'Почистим ванную',
+              ],
+            },
+          ],
+          // 1 - office
+          office:[
+            {
+              image: 'howoffice.webp',
+              title: 'в офисе',
+              text:[
+                'Вымоем окна снаружи и внутри',
+                'Протрём от пыли все доступные поверхности',
+                'Вымоем пол с плинтусами',
+                'Соберём и вынесем мусор',
+                'Помоем и продезинфицируем санузлы',
+              ],
+            },
+          ],
+          // 2 - renovation
+          renovation:[
+            {
+              image: 'howrenovation.webp',
+              title: 'после ремонта',
+              text:[
+                'Вымоем окна снаружи и внутри',
+                'Очистим поверхности от загрязнений, следов клея, побелки, лаков и красок',
+                'Отмоем радиаторы, трубы и двери',
+                'Вымоем стены и полы',
+                'Очистим помещение от пыли с помощью промышленного пылесоса',
+                'Соберем и вынесем строительный мусор',
+              ],
+            }
+          ],
+        },
         selectedHow:0,
         selectedType:0,
+        types:{
+          house:{
+            standard:{
+              description:'Наведем общий порядок, пропылесосим в комнатах, протрем зеркала, мебель, плинтусы, застелим постель, вымоем пол.',
+              todos:[
+'Соберём и вынесем мусор',
+'Наведём порядок',
+'Вытрем пыль с доступных поверхностей, включая подоконники и радиаторы',
+'Протрём зеркала и стеклянные поверхности',
+'Пропылесосим ковры и пол',
+'Вымоем пол с плинтусами',
+'Застелим постель',
+'Вытрем пыль на фасадах кухни',
+'Почистим столешницу, плиту, смеситель, раковину и рабочий рукав',
+'Почистим ванную',
+'Почистим и продезинфицируем унитаз',
+              ],
+            },
+            general:{
+              description:'Полная влажная уборка всей квартиры, включая окна, кухню и балкон.',
+              todos:[
+'Соберём мусор',
+'Наведём порядок',
+'Протрём все доступные поверхности, включая подоконники и радиаторы',
+'Протрём зеркала и стеклянные поверхности',
+'Пропылесосим пол и ковры',
+'Протрём выключатели и розетки',
+'Вымоем пол с плинтусами',
+'Застелим кровать',
+'Протрём верхние и нижние фасады кухни',
+'Почистим плиту, столешницу, смеситель, раковину и рабочий рукав',
+'Аккуратно расставим обувь',
+'Помоем и почистим ванную, душевую кабину и кафель',
+'Помоем и продезинфицируем унитаз и биде',
+'Наведём порядок на балконе, вымоем полы и стены',
+'Протрём двери, входные группы и ручки',
+'Обеспылим потолок, стены и люстры',
+'Вымоем окна снаружи и внутри, включая рамы, торцы и подоконник. В холодное время года моем окна только внутри',
+'Вымоем снаружи и внутри холодильник, духовку и микроволновку',
+              ],
+            },
+          },
+          
+        },
         showServicesList:false,
         roomsNumber:1,
         bathroomsNumber:1,
-        roomsPrice:9000,
+        initialPrices:{
+          house:9000,
+          apartment:6500,
+          office:0,
+          renovation:0,
+        },
+        pricePerSquareMeter:450,
         pricePerRoom:2000,
         pricePerBathroom:1000,
         cash:true,
@@ -694,13 +805,21 @@
         ],
       },
       methods:{
+        getPageType(){
+          var c = 'house';
+          console.log(window.location.href)
+          var url = new URL(window.location.href);
+          if(this.pages.includes(url.searchParams.get("in")))
+            c = url.searchParams.get("in");
+          return c;
+        },
         anyBonusSelected: function(){
           var result = false
           var bonus
           for(var i=0;i<this.bonuses.length;i++){
             bonus = this.bonuses[i]
-            if((bonus.type=='number'&&bonus.value>0) ||
-              (bonus.type=='boolean'&&bonus.value==true)
+            if((bonus.type=='number' && bonus.value>0) ||
+              (bonus.type=='boolean' && bonus.value==true)
               ){
               result = true
               break
@@ -723,7 +842,7 @@
           return result
         },
         total(){
-          return this.roomsPrice + (this.roomsNumber-1)*this.pricePerRoom + (this.bathroomsNumber-1)*this.pricePerBathroom +this.totalFromBonuses()
+          return this.initialPrices[this.selectedPage] + (this.roomsNumber-1)*this.pricePerRoom + (this.bathroomsNumber-1)*this.pricePerBathroom +this.totalFromBonuses()
         },
         formatPhoneNumber(phoneNumberString) {
           var cleaned = ('' + phoneNumberString).replace(/\D/g, '')
@@ -734,6 +853,23 @@
           }
           return null
         },
+        printOffer(selectedPage){
+          if(this.offers[selectedPage].withPrice)
+            return this.offers[selectedPage].value+' '+this.initialPrices[selectedPage]+' тг'
+          else
+            return this.offers[selectedPage].value 
+        },
+        getTodos(){
+          if(this.selectedPage=='house'
+            ||this.selectedPage=='apartment')
+            return this.todos['house']
+          else
+            return this.todos[this.selectedPage]
+        },
+      },
+      created(){
+        this.selectedPage = this.getPageType()
+        document.title = 'AVGM - '+this.printOffer(this.selectedPage)
       },
     })
   </script>
