@@ -5,8 +5,6 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content='Уборка домов, квартир, офисов или после ремонта в Атырау'>
-  <meta name="keywords" content="клининг,уборка,квартир,домов,офисов,ремонта,после,Атырау">
   <meta name="author" content="">
   <meta name="google-site-verification" content="N973lsxBSqpq2NMYliXCc1w5FJR4Uo2ckU5B0QgZ84w" />
 
@@ -241,12 +239,14 @@
         </nav>
         <div class="container">
           <div class="row mb-3 pb-3">
-            <div class="col-xl-10 col-lg-10 col-md-12 mb-3 pb-3">
-              <div class="offer-container mb-3 pb-3">
-                <h1>
+            <div class="col-xl-10 col-lg-10 col-md-12 my-4 py-4">
+              <div class="offer-container my-4 py-4">
+                <h1 class="mt-4 pt-4">
                   {{printOffer(selectedPage)}}
                 </h1>
-                <h6 class="w-50">Профессиональная генеральная уборка по стоимости частной домработницы</h6>
+                <h6 class="w-50" v-if="offers[selectedPage].description">
+                  {{offers[selectedPage].description}}
+                </h6>
                 <br>
                 <a class="btn btn-success shine" href="#calculator">
                   Рассчитать стоимость уборки
@@ -312,93 +312,88 @@
         <h2 class="text-center my-3">Расчет стоимости уборки</h2>
         <div class="row mb-3 pb-3">
           <div class="col-12 col-md-12 col-lg-8">
-              <div class="btn-group my-3" role="group" aria-label="">
-                <button type="button" class="btn btn-outline-success"
-                  :class="{active: selectedType==0}" @click="selectedType=0">Стандартная</button>
-                <button type="button" class="btn btn-outline-success"
-                  :class="{active: selectedType==1}" @click="selectedType=1">Генеральная</button>
+            
+            <div class="btn-group my-3" role="group" aria-label="" v-if="selectedPage=='house'||selectedPage=='apartment'">
+              <button type="button" class="btn btn-outline-success"
+              :class="{active: selectedType==0}" @click="selectedType=0">Стандартная</button>
+              <button type="button" class="btn btn-outline-success"
+              :class="{active: selectedType==1}" @click="selectedType=1">Генеральная</button>
+            </div>
+            <div class="row mb-4">
+              <div class="col-12 small" v-show="!showServicesList">
+                 <span>{{types[selectedType].description}}</span> <a href="" class="text-success" @click.prevent="showServicesList=true">Весь список услуг</a>
               </div>
-              <div v-show="selectedType==0">
-                  <div class="row mb-4">
-                    <div class="col-12 small" v-show="!showServicesList">
-                       <span>Наведем общий порядок, пропылесосим в комнатах, протрем зеркала, мебель, плинтусы, застелим постель, вымоем пол.</span> <a href="" class="text-success" @click.prevent="showServicesList=true">Весь список услуг</a>
-                    </div>
-                    <div class="col-12 small" v-show="showServicesList">
-                       <ul class="fa-ul">
-                          <li><span class="fa-li"><i class="fas fa-check-square text-success"></i></span>Соберём и вынесем мусор</li>
-                          <li><span class="fa-li"><i class="fas fa-check-square text-success"></i></span>Наведём порядок</li>
-                          <li><span class="fa-li"><i class="fas fa-check-square text-success"></i></span>Вытрем пыль с доступных поверхностей, включая подоконники и радиаторы</li>
-                          <li><span class="fa-li"><i class="fas fa-check-square text-success"></i></span>Протрём зеркала и стеклянные поверхности</li>
-                          <li><span class="fa-li"><i class="fas fa-check-square text-success"></i></span>Пропылесосим ковры и пол</li>
-                          <li><span class="fa-li"><i class="fas fa-check-square text-success"></i></span>Вымоем пол с плинтусами</li>
-                          <li><span class="fa-li"><i class="fas fa-check-square text-success"></i></span>Застелим постель</li>
-                          <li><span class="fa-li"><i class="fas fa-check-square text-success"></i></span>Вытрем пыль на фасадах кухни</li>
-                          <li><span class="fa-li"><i class="fas fa-check-square text-success"></i></span>Почистим столешницу, плиту, смеситель, раковину и рабочий рукав</li>
-                          <li><span class="fa-li"><i class="fas fa-check-square text-success"></i></span>Почистим ванную</li>
-                          <li><span class="fa-li"><i class="fas fa-check-square text-success"></i></span>Почистим и продезинфицируем унитаз</li>
-                          <li><span class="fa-li"><i class="fas fa-check-square text-success"></i></span>Вымоем лестницу</li>
-                       </ul>
-                       <a href="" class="text-success" @click.prevent="showServicesList=false">Свернуть</a>
-                    </div>
+              <div class="col-12 small" v-show="showServicesList">
+                 <ul class="fa-ul">
+                    <li v-for="todo in types[selectedType].todos"><span class="fa-li"><i class="fas fa-check-square text-success"></i></span>
+                      {{todo}}
+                    </li>
+                 </ul>
+                 <a href="" class="text-success" @click.prevent="showServicesList=false">Свернуть</a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 col-md-6 mb-3 mb-md-0" v-if="selectedType==0">Выберите количество комнат
+                <br>
+                  <div class="btn-group my-3" role="group" aria-label="">
+                    <button type="button" class="btn btn-outline-success"
+                      v-for="n in 5"
+                      :class="{active: roomsNumber==n}" @click="roomsNumber=n">{{n}}</button>
                   </div>
-                  <div class="row">
-                    <div class="col-12 col-md-6 mb-3 mb-md-0">Выберите количество комнат
-                      <br>
-                        <div class="btn-group my-3" role="group" aria-label="">
-                          <button type="button" class="btn btn-outline-success"
-                            v-for="n in 5"
-                            :class="{active: roomsNumber==n}" @click="roomsNumber=n">{{n}}</button>
-                        </div>
-                    </div>
-                    <!---->
-                    <div class="col-12 col-md-6">и количество санузлов
-                      <br>
-                        <div class="btn-group my-3" role="group" aria-label="">
-                          <button type="button" class="btn btn-outline-success"
-                            v-for="n in 5"
-                            :class="{active: bathroomsNumber==n}" @click="bathroomsNumber=n">{{n}}</button>
-                        </div>
-                    </div>
+              </div>
+              <div class="col-12 col-md-6 mb-3 mb-md-0" v-else>Общая площадь
+                <br>
+                <div class="input-group my-3">
+                <input type="number" class="form-control text-success" v-model="area">
+                <div class="input-group-append">
+                  <span class="input-group-text text-success bg-light" id="basic-addon2">м<sup>2</sup></span>
+                </div>
+              </div>
+              </div>
+              <div class="col-12 col-md-6">и количество санузлов
+                <br>
+                  <div class="btn-group my-3" role="group" aria-label="">
+                    <button type="button" class="btn btn-outline-success"
+                      v-for="n in 5"
+                      :class="{active: bathroomsNumber==n}" @click="bathroomsNumber=n">{{n}}</button>
                   </div>
-                  <p class="mt-3">Дополнительные услуги</p>
-                  <div class="row">
-                    <div class="col-12 col-md-6" v-for="n in 2">
-                      <div class="my-2" v-for="(bonus,index) in bonuses.slice((n-1)*bonuses.length/2, (n-1)*bonuses.length/2 + bonuses.length/2)">
-                        <button class="btn btn-outline-default w-100 mb-1 py-1 d-flex align-items-center"
-                          @click="toggle(bonus)">
-                          <img class="icon mr-1" :src="bonus.image">
-                          {{bonus.name}}
-                        </button>
-                        <transition name="collapse">
-                            <div class="card card-body" v-if="(bonus.type=='number'&&bonus.value>0)||
-                            (bonus.type=='boolean'&&bonus.value==true)">
-                              <div class="input-group mb-3" v-if="bonus.type=='number'">
-                                <div class="input-group-prepend">
-                                  <button class="btn btn-outline-success" type="button" id="button-addon1" 
-                                  @click="bonus.value=bonus.value>2?bonus.value-bonus.step:bonus.step">
-                                    <i class="fas fa-minus"></i>
-                                  </button>
-                                </div>
-                                <span class="input-group-text">{{bonus.value}} шт.</span>
-                                <div class="input-group-append">
-                                  <button class="btn btn-outline-success" type="button" id="button-addon1"
-                                  @click="bonus.value+=bonus.step">
-                                    <i class="fas fa-plus"></i>
-                                  </button>
-                                </div>
-                              </div>
-                              <div class="small">
-                                {{bonus.description}}
-                              </div>
-                            </div>
-                        </transition>
+              </div>
+            </div>
+            <p class="mt-3">Дополнительные услуги</p>
+            <div class="row">
+              <div class="col-12 col-md-6" v-for="n in 2">
+                <div class="my-2" v-for="(bonus,index) in bonuses[selectedType].slice((n-1)*bonuses[selectedType].length/2, (n-1)*bonuses[selectedType].length/2 + bonuses[selectedType].length/2)">
+                  <button class="btn btn-light w-100 mb-1 py-1 d-flex align-items-center text-success"
+                    @click="toggle(bonus)">
+                    <img class="icon mr-1" :src="bonus.image">
+                    {{bonus.name}}
+                  </button>
+                  <transition name="collapse">
+                      <div class="card card-body" v-if="(bonus.type=='number'&&bonus.value>0)||
+                      (bonus.type=='boolean'&&bonus.value==true)">
+                        <div class="input-group mb-3" v-if="bonus.type=='number'">
+                          <div class="input-group-prepend">
+                            <button class="btn btn-outline-success" type="button" id="button-addon1" 
+                            @click="bonus.value=bonus.value>2?bonus.value-bonus.step:bonus.step">
+                              <i class="fas fa-minus"></i>
+                            </button>
+                          </div>
+                          <span class="input-group-text">{{bonus.value}} шт.</span>
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-success" type="button" id="button-addon1"
+                            @click="bonus.value+=bonus.step">
+                              <i class="fas fa-plus"></i>
+                            </button>
+                          </div>
+                        </div>
+                        <div class="small">
+                          {{bonus.description}}
+                        </div>
                       </div>
-                    </div>
-                  </div>
+                  </transition>
+                </div>
               </div>
-              <div v-show="selectedType==1">
-                
-              </div>
+            </div>
           </div>
           <form class="col-12 col-md-12 col-lg-4 text-dark">
               <div class="card py-3 px-3">
@@ -406,17 +401,25 @@
                       <h4>Итого</h4>
                       <div class="row py-2">
                           <div class="col-12"><span class="text-muted">Основное</span></div>
-                          <div class="col-8"><span>комнат: {{roomsNumber}} <br>
+                          <div class="col-8">
+                            <span v-if="selectedType==0">
+                              комнат: {{roomsNumber}}
+                            </span>
+                            <span v-else>
+                              общая площадь: {{area}}
+                            </span> 
+                            <br>
+                            <span>
                               санузлов: {{bathroomsNumber}}
-                          </span></div>
-                          <div class="col-4 text-right">{{initialPrices[selectedPage] + (roomsNumber-1)*pricePerRoom + (bathroomsNumber-1)*pricePerBathroom}} тг</div>
+                            </span></div>
+                          <div class="col-4 text-right">{{baseTotal()}} тг</div>
                       </div>
                       <div class="row py-2" v-if="anyBonusSelected()">
                         <div class="col-12"><span class="text-muted">
                           Дополнительно</span>
                         </div>
                         <div class="col-12">
-                            <div class="row flex-nowrap" v-for="bonus in bonuses" 
+                            <div class="row flex-nowrap" v-for="bonus in bonuses[selectedType]" 
                             v-if="(bonus.type=='number'&&bonus.value>0)||
                             (bonus.type=='boolean'&&bonus.value==true)">
                                <div class="col-8">{{bonus.name}} <span v-if="bonus.type=='number'&&bonus.value>1">(x{{bonus.value}})</span></div>
@@ -436,7 +439,7 @@
                       <div class="row mt-3">
                           <div class="col-12 mb-3">
                               <label for="phone">Телефон</label>
-                              <input placeholder="+7 (___) ___-__-__" type="tel" id="phone" required="required" class="form-control" data-mask="+# (###) ###-##-##" data-previous-value="+2 (342) 345-32-45">
+                              <input type="tel" v-model="phone" required="required" class="form-control">
                               
                           </div>
                           <div class="col-12 mb-3">
@@ -449,11 +452,90 @@
                               </div>
                           </div>
                           <div class="col-12">
-                              <button type="submit" class="btn btn-primary w-100">Оформить заказ</button><small class="d-inline-block mt-2">Перезвоним уточнить детали</small></div>
+                            <button type="submit" class="btn btn-primary w-100"
+                              v-if="cash==false">Оплатить</button>
+                            <button type="submit" class="btn btn-primary w-100"
+                              v-else>Оформить заказ</button>
+                            <small class="d-inline-block mt-2">Перезвоним уточнить детали</small>
+                          </div>
                       </div>
                   </form>
               </div>
           </form>        
+        </div>
+      </div>
+    </section>
+    <section id="description" class="py-3" v-if="selectedPage=='house'||selectedPage=='apartment'">
+      <div class="container">
+        <h2 class="text-center my-3">
+          Что входит в стандартную и генеральную уборку?
+        </h2>
+        <div class="table-responsive">
+            
+<table class="table table-bordered table-hover">      
+  <thead class="alert-success">
+    <tr>  <th class="text-center"><strong>Что мы сделаем </strong></th><th class="text-center" width="120"><strong>Стандартная уборка</strong></th><th class="text-center" width="120"><strong>Генеральная уборка</strong></th></tr> 
+  </thead>
+  <tbody>
+  <tr >   <td>Соберём и вынесем мусор</td><td class="text-center"><i class="fas fa-plus"></i></td><td class="text-center"><i class="fas fa-plus"></i></td></tr>  <tr >   <td>Наведём во всех комнвтах порядок
+   </td><td class="text-center"><i class="fas fa-plus"></i></td><td class="text-center"><i class="fas fa-plus"></i></td>
+   
+  </tr>  <tr >   <td>Протрём все доступные поверхности, включая   подоконники и радиаторы
+   </td><td class="text-center"><i class="fas fa-plus"></i></td><td class="text-center"><i class="fas fa-plus"></i></td>
+   
+  </tr>  <tr >   <td>Протрём зеркала и стеклянные поверхности
+   </td><td class="text-center"><i class="fas fa-plus"></i></td><td class="text-center"><i class="fas fa-plus"></i></td>
+   
+  </tr>  <tr >   <td>Пропылесосим пол и ковры
+   </td><td class="text-center"><i class="fas fa-plus"></i></td><td class="text-center"><i class="fas fa-plus"></i></td>
+   
+  </tr>  <tr >   <td>Вымоем пол с плинтусами
+   </td><td class="text-center"><i class="fas fa-plus"></i></td><td class="text-center"><i class="fas fa-plus"></i></td>
+   
+  </tr>  <tr >   <td>Застелим кровать
+   </td><td class="text-center"><i class="fas fa-plus"></i></td><td class="text-center"><i class="fas fa-plus"></i></td>
+   
+  </tr>  <tr >   <td>Протрём верхние и нижние фасады кухни
+   </td><td class="text-center"><i class="fas fa-plus"></i></td><td class="text-center"><i class="fas fa-plus"></i></td>
+   
+  </tr>  <tr >   <td>Почистим плиту, столешницу, смеситель,   раковину и рабочий рукав
+   </td><td class="text-center"><i class="fas fa-plus"></i></td><td class="text-center"><i class="fas fa-plus"></i></td>
+   
+  </tr>  <tr >   <td>Помоем и почистим ванную, душевую кабину   и кафель
+   </td><td class="text-center"><i class="fas fa-plus"></i></td><td class="text-center"><i class="fas fa-plus"></i></td>
+   
+  </tr>  <tr >   <td>Помоем и продезинфицируем унитаз   и биде
+   </td><td class="text-center"><i class="fas fa-plus"></i></td><td class="text-center"><i class="fas fa-plus"></i></td>
+   
+  </tr>  <tr >   <td>Протрём выключатели и розетки
+   </td><td class="text-center"></td><td class="text-center"><i class="fas fa-plus"></i></td>
+   </tr>  <tr >   <td>Аккуратно расставим обувь
+   </td><td class="text-center"></td><td class="text-center"><i class="fas fa-plus"></i></td>
+   
+  </tr>  <tr >   <td>Наведём порядок на балконе, вымоем полы   и стены
+   </td><td class="text-center"></td><td class="text-center"><i class="fas fa-plus"></i></td>
+   
+  </tr>  <tr >   <td>Протрём двери, входные группы и ручки
+   </td><td class="text-center"></td><td class="text-center"><i class="fas fa-plus"></i></td>
+   
+  </tr>  <tr >   <td>Обеспылим потолок, стены и люстры
+   </td><td class="text-center"></td><td class="text-center"><i class="fas fa-plus"></i></td></tr><tr ><td>Вымоем окна снаружи и внутри, включая   рамы, торцы и подоконник. В холодное время года моем окна только   внутри
+   </td><td class="text-center"></td><td class="text-center"><i class="fas fa-plus"></i></td>
+   
+  </tr>  <tr >   <td>Вымоем снаружи и внутри холодильник,   духовку и микроволновку
+   </td><td class="text-center"></td><td class="text-center"><i class="fas fa-plus"></i></td>
+   
+  </tr>  <tr >   <td>Вымоем   снаружи и внутри плательный шкаф, наведем порядок внутри, аккуратно   сложим вещи. Убираем только в присутствии клиента
+  </td>
+  
+  <td></td><td class="text-center"><i class="fas fa-plus"></i></td></tr>  <tr >   <td>Вымоем   снаружи и внутри кухонные шкафы, наведем порядок
+  </td><td></td><td class="text-center"><i class="fas fa-plus"></i></td></tr>  <tr >   <td>Помоем   посуду
+   </td><td></td><td class="text-center"><i class="fas fa-plus"></i></td>
+   
+  </tr>  <tr >   <td>Почистим   и продезинфицируем лоток, сменим наполнитель, помоем мисочки
+   </td><td class="text-center"></td><td class="text-center"><i class="fas fa-plus"></i></td>
+   
+  </tr></tbody></table>
         </div>
       </div>
     </section>
@@ -509,14 +591,14 @@
                     <ul class="list-unstyled">
                         <!--<li class="list-item mb-2">
                             <a class="text-success" href="/himchistka-mebeli-kovrov">Химчистка мягкой мебели и ковров в Алматы</a> </li>-->
+                        <!--<li class="list-item mb-2">
+                            <a class="text-success" href="">Оплата</a> </li>
                         <li class="list-item mb-2">
-                            <a class="text-success" href="/oplata">Оплата</a> </li>
+                            <a class="text-success" href="">Скидки и акции</a> </li>
                         <li class="list-item mb-2">
-                            <a class="text-success" href="/skidki-i-aktsii">Скидки и акции</a> </li>
+                            <a class="text-success" href="">Прайс-лист услуг</a> </li>
                         <li class="list-item mb-2">
-                            <a class="text-success" href="/stoimost-uslug-uborki-i-himchistki-myagkoj-mebeli-v-almaty">Прайс-лист услуг</a> </li>
-                        <li class="list-item mb-2">
-                            <a class="text-success" href="/otzyvy-i-rekomendatsii">Отзывы и рекомендации</a> </li>
+                            <a class="text-success" href="">Отзывы и рекомендации</a> </li>-->
                     </ul>
 
                     Принимаем карты
@@ -528,7 +610,7 @@
     </footer>
     <div class="modal fade" id="sidebarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-sm mr-0 mt-0" role="document">
-        <div class="modal-content navbar navbar-light bg-light h-100">
+        <div class="modal-content navbar navbar-light bg-white h-100">
           <div class="modal-header w-100">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -565,21 +647,26 @@
         offers:{
           house:{
             value: 'Уборка домов в Атырау от ',
+            description: 'Профессиональная генеральная уборка по стоимости частной домработницы',
             withPrice:true
           },
           apartment:{
             value: 'Уборка квартир в Атырау от ',
+            description: 'Профессиональная генеральная уборка по стоимости частной домработницы',
             withPrice:true
           },
           office:{
             value: 'Уборка офисов в Атырау',
+            description: 'Профессиональная уборка по цене приходящей уборщицы',
             withPrice:false
           },
           renovation:{
             value: 'Уборка после ремонта в квартирах, домах и офисах Атырау',
+            description: null,
             withPrice:false
           },
         },
+        phone: null,
         phones: ['+77122457525',],
         emails: ['ut.or.2017@gmail.com'],
         todos:{
@@ -655,11 +742,10 @@
         },
         selectedHow:0,
         selectedType:0,
-        types:{
-          house:{
-            standard:{
-              description:'Наведем общий порядок, пропылесосим в комнатах, протрем зеркала, мебель, плинтусы, застелим постель, вымоем пол.',
-              todos:[
+        types:[
+          {
+            description:'Наведем общий порядок, пропылесосим в комнатах, протрем зеркала, мебель, плинтусы, застелим постель, вымоем пол.',
+            todos:[
 'Соберём и вынесем мусор',
 'Наведём порядок',
 'Вытрем пыль с доступных поверхностей, включая подоконники и радиаторы',
@@ -671,11 +757,11 @@
 'Почистим столешницу, плиту, смеситель, раковину и рабочий рукав',
 'Почистим ванную',
 'Почистим и продезинфицируем унитаз',
-              ],
-            },
-            general:{
-              description:'Полная влажная уборка всей квартиры, включая окна, кухню и балкон.',
-              todos:[
+            ],
+          },
+          {
+            description:'Полная влажная уборка всей квартиры, включая окна, кухню и балкон.',
+            todos:[
 'Соберём мусор',
 'Наведём порядок',
 'Протрём все доступные поверхности, включая подоконники и радиаторы',
@@ -694,12 +780,11 @@
 'Обеспылим потолок, стены и люстры',
 'Вымоем окна снаружи и внутри, включая рамы, торцы и подоконник. В холодное время года моем окна только внутри',
 'Вымоем снаружи и внутри холодильник, духовку и микроволновку',
-              ],
-            },
+            ],
           },
-          
-        },
+        ],
         showServicesList:false,
+        area:30,
         roomsNumber:1,
         bathroomsNumber:1,
         initialPrices:{
@@ -713,95 +798,135 @@
         pricePerBathroom:1000,
         cash:true,
         bonuses:[
-          {
-            name: 'Холодильник',
-            image: 'img/calculator/fridge.svg',
-            type:'number',
-            value:0,
-            step:1,
-            description:'Вымоем снаружи и внутри, выкинем пропавшее. Морозильную камеру размораживает клиент.',
-            price:1500,
-          },
-          {
-            name: 'Духовка',
-            image: 'img/calculator/oven.svg',
-            type:'boolean',
-            value:false,
-            description:'Вымоем снаружи и внутри.',
-            price:1500,
-          },
-          {
-            name: 'Посуда',
-            image: 'img/calculator/plate.svg',
-            type:'boolean',
-            value:false,
-            price:1000,
-            description:'Помоем всю грязную посуду, высушим и аккуратно расставим.',
-          },
-          {
-            name: 'Глажка',
-            image: 'img/calculator/laundry.svg',
-            type:'number',
-            value:0,
-            step:10,
-            price:1400,
-            description:'Погладим всё, что оставите, кроме нижнего белья и верхней одежды.',
-          },
-          {
-            name: 'Питомец',
-            image: 'img/calculator/cat.svg',
-            type:'number',
-            value:0,
-            step:1,
-            price:1000,
-            description:'Почистим и продезинфицируем лоток, сменим наполнитель, помоем мисочки.',
-          },
-          //
-          {
-            name: 'Кухонные шкафы',
-            image: 'img/calculator/kitchen.svg',
-            type:'number',
-            value:0,
-            step:1,
-            price:1200,
-            description:'Вымоем снаружи и внутри, наведём порядок.',
-          },
-          {
-            name: 'Окна',
-            image: 'img/calculator/window.svg',
-            type:'number',
-            value:0,
-            step:1,
-            price:1000,
-            description:'Вымоем снаружи и внутри, включая рамы, торцы и подоконник. Одно окно — 2-3 секции общей площадью ~3 кв. м.',
-          },
-          {
-            name: 'Шкафы',
-            image: 'img/calculator/cupboard.svg',
-            type:'number',
-            value:0,
-            step:1,
-            price:1600,
-            description:'Вымоем снаружи и внутри, наведём порядок, аккуратно сложим вещи. Делаем только в присутствии клиента.',
-          },
-          {
-            name: 'Балкон',
-            image: 'img/calculator/balcony.svg',
-            type:'number',
-            value:0,
-            step:1,
-            price:1900,
-            description:'Наведём порядок, вымоем полы и стены. Окна считаем отдельно.',
-          },
-          {
-            name: 'Микроволновка',
-            image: 'img/calculator/microwave.svg',
-            type:'number',
-            value:0,
-            step:1,
-            price:700,
-            description:'Вымоем снаружи и внутри',
-          },
+          [
+            {
+              name: 'Холодильник',
+              image: 'img/calculator/fridge.svg',
+              type:'number',
+              value:0,
+              step:1,
+              description:'Вымоем снаружи и внутри, выкинем пропавшее. Морозильную камеру размораживает клиент.',
+              price:1500,
+            },
+            {
+              name: 'Духовка',
+              image: 'img/calculator/oven.svg',
+              type:'boolean',
+              value:false,
+              description:'Вымоем снаружи и внутри.',
+              price:1500,
+            },
+            {
+              name: 'Посуда',
+              image: 'img/calculator/plate.svg',
+              type:'boolean',
+              value:false,
+              price:1000,
+              description:'Помоем всю грязную посуду, высушим и аккуратно расставим.',
+            },
+            {
+              name: 'Глажка',
+              image: 'img/calculator/laundry.svg',
+              type:'number',
+              value:0,
+              step:10,
+              price:140,
+              description:'Погладим всё, что оставите, кроме нижнего белья и верхней одежды.',
+            },
+            {
+              name: 'Питомец',
+              image: 'img/calculator/cat.svg',
+              type:'number',
+              value:0,
+              step:1,
+              price:1000,
+              description:'Почистим и продезинфицируем лоток, сменим наполнитель, помоем мисочки.',
+            },
+            //
+            {
+              name: 'Кухонные шкафы',
+              image: 'img/calculator/kitchen.svg',
+              type:'number',
+              value:0,
+              step:1,
+              price:1200,
+              description:'Вымоем снаружи и внутри, наведём порядок.',
+            },
+            {
+              name: 'Окна',
+              image: 'img/calculator/window.svg',
+              type:'number',
+              value:0,
+              step:1,
+              price:1000,
+              description:'Вымоем снаружи и внутри, включая рамы, торцы и подоконник. Одно окно — 2-3 секции общей площадью ~3 кв. м.',
+            },
+            {
+              name: 'Шкафы',
+              image: 'img/calculator/cupboard.svg',
+              type:'number',
+              value:0,
+              step:1,
+              price:1600,
+              description:'Вымоем снаружи и внутри, наведём порядок, аккуратно сложим вещи. Делаем только в присутствии клиента.',
+            },
+            {
+              name: 'Балкон',
+              image: 'img/calculator/balcony.svg',
+              type:'number',
+              value:0,
+              step:1,
+              price:1900,
+              description:'Наведём порядок, вымоем полы и стены. Окна считаем отдельно.',
+            },
+            {
+              name: 'Микроволновка',
+              image: 'img/calculator/microwave.svg',
+              type:'number',
+              value:0,
+              step:1,
+              price:700,
+              description:'Вымоем снаружи и внутри',
+            },
+          ],
+          [
+            {
+              name: 'Шкафы и гардероб',
+              image: 'img/calculator/cupboard.svg',
+              type:'number',
+              value:0,
+              step:1,
+              price:1600,
+              description:'Вымоем снаружи и внутри, наведём порядок, аккуратно сложим вещи. Делаем только в присутствии клиента.',
+            },
+            {
+              name: 'Обработка штор от пыли',
+              image: 'img/calculator/steam-iron.svg',
+              type:'number',
+              value:0,
+              step:1,
+              price:500,
+              description:'Обработаем шторы и тюль от пыли парогенератором. Считаем поштучно.',
+            },
+            {
+              name: 'Снять и повесить шторы',
+              image: 'img/calculator/window.svg',
+              type:'number',
+              value:0,
+              step:1,
+              price:700,
+              description:'Снимем старые шторы и тюль, повесим новые. Считаем комплектами, комплект — всё, что висит на одном окне.',
+            },
+            {
+              name: 'Глажка',
+              image: 'img/calculator/laundry.svg',
+              type:'number',
+              value:0,
+              step:10,
+              price:140,
+              description:'Погладим всё, что оставите, кроме нижнего белья и верхней одежды.',
+            },
+          ],
         ],
       },
       methods:{
@@ -816,8 +941,8 @@
         anyBonusSelected: function(){
           var result = false
           var bonus
-          for(var i=0;i<this.bonuses.length;i++){
-            bonus = this.bonuses[i]
+          for(var i=0;i<this.bonuses[this.selectedType].length;i++){
+            bonus = this.bonuses[this.selectedType][i]
             if((bonus.type=='number' && bonus.value>0) ||
               (bonus.type=='boolean' && bonus.value==true)
               ){
@@ -836,13 +961,19 @@
         },
         totalFromBonuses: function(){
           var result = 0
-          this.bonuses.forEach((bonus)=>{
+          this.bonuses[this.selectedType].forEach((bonus)=>{
             result += bonus.value*bonus.price
           })
           return result
         },
+        baseTotal(){
+          if(this.selectedType==0)
+            return this.initialPrices[this.selectedPage] + (this.roomsNumber-1)*this.pricePerRoom + (this.bathroomsNumber-1)*this.pricePerBathroom
+          else
+            return (this.area)*this.pricePerSquareMeter + (this.bathroomsNumber-1)*this.pricePerBathroom
+        },
         total(){
-          return this.initialPrices[this.selectedPage] + (this.roomsNumber-1)*this.pricePerRoom + (this.bathroomsNumber-1)*this.pricePerBathroom +this.totalFromBonuses()
+          return this.baseTotal()+this.totalFromBonuses()
         },
         formatPhoneNumber(phoneNumberString) {
           var cleaned = ('' + phoneNumberString).replace(/\D/g, '')
@@ -869,6 +1000,8 @@
       },
       created(){
         this.selectedPage = this.getPageType()
+        if(this.selectedPage!='house'&&this.selectedPage!='apartment')
+          this.selectedType = 1
         document.title = 'AVGM - '+this.printOffer(this.selectedPage)
       },
     })
