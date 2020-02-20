@@ -210,7 +210,6 @@
     }
     
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
 </head>
 
 <body id="page-top">
@@ -395,9 +394,8 @@
               </div>
             </div>
           </div>
-          <form class="col-12 col-md-12 col-lg-4 text-dark">
-              <div class="card py-3 px-3">
-                  <form action="" method="post">
+          <div class="col-12 col-md-12 col-lg-4 text-dark">
+              <div class="card py-3 px-3" id="check">
                       <h4>Итого</h4>
                       <div class="row py-2">
                           <div class="col-12"><span class="text-muted">Основное</span></div>
@@ -453,15 +451,14 @@
                           </div>
                           <div class="col-12">
                             <button type="submit" class="btn btn-primary w-100"
-                              v-if="cash==false">Оплатить</button>
+                              v-if="cash==false" :disabled="phoneIsEmpty()==true">Оплатить</button>
                             <button type="submit" class="btn btn-primary w-100"
-                              v-else>Оформить заказ</button>
+                              v-else @click="submitRequest" :disabled="phoneIsEmpty()==true">Оформить заказ</button>
                             <small class="d-inline-block mt-2">Перезвоним уточнить детали</small>
                           </div>
                       </div>
-                  </form>
-              </div>
-          </form>        
+              </div>  
+            </div>    
         </div>
       </div>
     </section>
@@ -638,6 +635,9 @@
       </a>
     </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js?render=6LfSR9oUAAAAAKCclvFZNhmokgzi4QGO8HdKKPDt"></script>
   <script type="text/javascript">
     var app = new Vue({
       el: '#app',
@@ -667,8 +667,8 @@
           },
         },
         phone: null,
-        phones: ['+77122457525',],
-        emails: ['ut.or.2017@gmail.com'],
+        phones: ['+77013222137',],
+        emails: ['nk.avgmltd@gmail.com'],
         todos:{
           //0 - house, apartment
           house:[
@@ -932,7 +932,6 @@
       methods:{
         getPageType(){
           var c = 'house';
-          console.log(window.location.href)
           var url = new URL(window.location.href);
           if(this.pages.includes(url.searchParams.get("in")))
             c = url.searchParams.get("in");
@@ -966,13 +965,13 @@
           })
           return result
         },
-        baseTotal(){
+        baseTotal: function(){
           if(this.selectedType==0)
             return this.initialPrices[this.selectedPage] + (this.roomsNumber-1)*this.pricePerRoom + (this.bathroomsNumber-1)*this.pricePerBathroom
           else
             return (this.area)*this.pricePerSquareMeter + (this.bathroomsNumber-1)*this.pricePerBathroom
         },
-        total(){
+        total: function(){
           return this.baseTotal()+this.totalFromBonuses()
         },
         formatPhoneNumber(phoneNumberString) {
@@ -990,12 +989,56 @@
           else
             return this.offers[selectedPage].value 
         },
-        getTodos(){
+        getTodos: function(){
           if(this.selectedPage=='house'
             ||this.selectedPage=='apartment')
             return this.todos['house']
           else
             return this.todos[this.selectedPage]
+        },
+        phoneIsEmpty: function(){
+          if(this.phone==null)
+            return true
+          else if(this.phone.length==0)
+            return true
+          return false
+        },
+        utoa: function(str) {
+          return window.btoa(unescape(encodeURIComponent(str)));
+        },
+        atou: function(str) {
+          return decodeURIComponent(escape(window.atob(str)));
+        },
+        submitRequest: function(){
+          grecaptcha.execute('6LfSR9oUAAAAAKCclvFZNhmokgzi4QGO8HdKKPDt', {action: 'homepage'}).then((token) =>{
+            var body = this.constructMailBody()
+            //body = this.utoa(body)
+            axios.post('backend.php', {
+              email: body,
+            })
+            .then(function (response) {
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+          });
+        },
+        constructMailBody: function(){
+          var check = document.getElementById('check').innerHTML
+          var result = 
+`<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<div class="container my-4">
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="card py-3 px-3">
+      `+check+`
+      </div>
+    </div>
+  </div>
+</div>
+`
+          return result
         },
       },
       created(){
