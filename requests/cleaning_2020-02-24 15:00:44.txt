@@ -1,0 +1,1 @@
+{"typeNameInRU":"Дом","typeCode":0,"roomsNumber":1,"area":30,"bathroomsNumber":1,"baseTotal":9000,"anyBonusSelected":false,"bonuses":[],"total":9000,"phone":"87081592648","cash":true}
