@@ -437,7 +437,6 @@
                           <div class="col-12 mb-3">
                               <label for="phone">Телефон</label>
                               <input type="tel" v-model="phone" required="required" class="form-control">
-                              
                           </div>
                           <div class="col-12 mb-3">
                               <label for="card">Оплата</label>
@@ -645,6 +644,12 @@
       data: {
         selectedPage:'house',
         pages:['house','apartment','office','renovation'],
+        russianPages:{
+          house: 'Дом',
+          apartment: 'Квартира',
+          office: 'Офис',
+          renovation: 'После ремонта',
+        },
         offers:{
           house:{
             value: 'Уборка домов в Атырау от ',
@@ -1016,27 +1021,30 @@
         submitRequest: function(){
           grecaptcha.execute('6LfSR9oUAAAAAKCclvFZNhmokgzi4QGO8HdKKPDt', {action: 'homepage'}).then((token) =>{
             var body = this.constructMailBody()
-            body = this.utoa(body)
+            //body = this.utoa(body)
+            
             var params = new URLSearchParams();
             params.append('email', body);
             params.append('token', token);
-            axios.post('backend.php', params)
+            axios.post('http://avgm-b.test/backend.php', params)
             .then((response) =>{
               console.log(response);
-              this.requestSend=false
+              
               if(response.data=='success')
                 alert('Заявка принята! Мы свяжемся с Вами в ближайщее время')
               else if(response.data=='retry')
                 alert('Ошибка Google Recaptcha! Пожалуйста попробуйте снова')
+              this.requestSend=false
             })
             .catch(function (error) {
               console.log(error);
-            });
+              this.requestSend=false
+            })
             this.requestSend = true
           });
         },
         constructMailBody: function(){
-          var check = document.getElementById('check').innerHTML
+          /*var check = document.getElementById('check').innerHTML
           var result = 
 `<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <div class="container my-4">
@@ -1048,7 +1056,58 @@
     </div>
   </div>
 </div>
-`
+`*/
+          var selectedBonuses = []
+          if(this.anyBonusSelected()){
+            this.bonuses[this.selectedType].forEach((bonus)=>{
+              if((bonus.type=='number'&&bonus.value>0)||
+                (bonus.type=='boolean'&&bonus.value==true))
+                selectedBonuses.push({
+                  name:bonus.name,
+                  type:bonus.type,
+                  value:bonus.value,
+                  price:bonus.price,
+                })
+            })
+          }
+          var result = {
+            typeNameInRU: this.russianPages[this.selectedPage],
+            typeCode: this.selectedType,
+            roomsNumber: this.roomsNumber,
+            area: this.area,
+            bathroomsNumber: this.bathroomsNumber,
+            baseTotal: this.baseTotal(),
+            anyBonusSelected: this.anyBonusSelected(),
+            bonuses: selectedBonuses,
+            total: this.total(),
+            phone: this.phone,
+            cash: this.cash
+          }
+          /*var tab = '<tab>'
+          var result = 'Уборка: "'+this.russianPages[this.selectedPage]+'"<br>'
+          result += 'Основное<br>'
+          if(this.selectedType==0)
+            result +='Тип: Стандартная<br>комнат:'+this.roomsNumber+'<br>'
+          else
+            result +='Тип: Генеральная<br>общая площадь:'+this.area+'<br>'
+          result +='санузлов:'+this.bathroomsNumber+tab+this.baseTotal()+' тг<br>'
+          if(this.anyBonusSelected()){
+            result +='Дополнительно<br>'
+            this.bonuses[this.selectedType].forEach((bonus)=>{
+              result += bonus.name
+              if(bonus.type=='number'&&bonus.value>1)
+                result +='(x'+bonus.value+')'
+              result+=tab+bonus.value*bonus.price+' тг<br>'
+            })
+          }
+          result +='<hr>'
+          result +='К Оплате'+tab+this.total()+' тг<br>'
+          result +='Телефон: '+tab+this.phone+'<br>'
+          var cc = 'картой'
+          if(this.cash)
+            cc = 'наличными'
+          result +='Тип оплаты:'+tab+cc+'<br>'*/
+          result = JSON.stringify(result)
           return result
         },
         submitName: function(){
