@@ -35,7 +35,7 @@ var app = new Vue({
         name: null,
         phone: null,
         phones: ["+77013222137"],
-        emails: ["manager@avgmltd.com"],
+        emails: ["avgmclean@mail.ru"],
         todos: {
             house: [{
                 image: "howroom.jpg",
@@ -266,8 +266,8 @@ var app = new Vue({
                     console.log(e), "success" == e.data ? alert("Заявка принята! Мы свяжемся с Вами в ближайщее время") : "retry" == e.data && alert("Ошибка Google Recaptcha! Пожалуйста попробуйте снова"), this.requestSend = !1
                 }).catch(function(e) {
                     console.log(e), this.requestSend = !1
-                }), this.requestSend = !0
-            })
+                })
+            }), this.requestSend = !0
         },
         constructMailBody: function() {
             var e = [];
