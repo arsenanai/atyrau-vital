@@ -3,7 +3,6 @@ require 'phpmailer/vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-echo getcwd();
 function getBody($obj,$date){
     $result = "
     <!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
@@ -54,7 +53,7 @@ function getBody($obj,$date){
     return $result;
 }
 function operate(){
-    $directory = "requests".DIRECTORY_SEPARATOR;
+    $directory = getcwd().DIRECTORY_SEPARATOR."requests".DIRECTORY_SEPARATOR;
     $files = scandir ($directory);
     if(array_key_exists(2,$files)){
         $firstFile = $directory . $files[2];
@@ -112,7 +111,7 @@ while($now<$after){
         //success
     }else{
         //exception
-        file_put_contents('errors.log',$result);
+        file_put_contents(getcwd().DIRECTORY_SEPARATOR.'errors.log',$result);
     }
     $now = time();
 }
