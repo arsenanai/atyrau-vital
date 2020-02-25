@@ -485,6 +485,12 @@ a.text-primary:focus, a.text-primary:hover {
 }
 
 .filter-light {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, .33)), to(rgba(255, 255, 255, .33)));
-  background-image: linear-gradient(rgba(255, 255, 255, .33), rgba(255, 255, 255, .33))
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, .66)), to(rgba(255, 255, 255, .66)));
+  background-image: linear-gradient(rgba(255, 255, 255, .66), rgba(255, 255, 255, .66))
+}
+.overflow-hidden{
+  overflow:hidden;
+}
+.rounded{
+  border-radius: .25rem;
 }
