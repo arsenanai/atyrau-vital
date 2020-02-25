@@ -53,7 +53,7 @@ function getBody($obj,$date){
     return $result;
 }
 function operate(){
-    $directory = getcwd().DIRECTORY_SEPARATOR."requests".DIRECTORY_SEPARATOR;
+    $directory = getcwd().DIRECTORY_SEPARATOR."httpdocs".DIRECTORY_SEPARATOR."requests".DIRECTORY_SEPARATOR;
     $files = scandir ($directory);
     if(array_key_exists(2,$files)){
         $firstFile = $directory . $files[2];
@@ -111,7 +111,7 @@ while($now<$after){
         //success
     }else{
         //exception
-        file_put_contents(getcwd().DIRECTORY_SEPARATOR.'errors.log',$result);
+        file_put_contents(getcwd().DIRECTORY_SEPARATOR."httpdocs".DIRECTORY_SEPARATOR.'errors.log',$result);
     }
     $now = time();
 }
