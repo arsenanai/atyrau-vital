@@ -17,6 +17,7 @@ if(array_key_exists(2,$files)){
     function getBody($obj,$date){
         /*$result = {
             typeNameInRU: $obj->russianPages[$obj->selectedPage],
+            typeName
             typeCode: $obj->typeCode,
             roomsNumber: $obj->roomsNumber,
             area: $obj->area,
@@ -43,13 +44,19 @@ if(array_key_exists(2,$files)){
         </style>
         <div><h1>Заявка на клининг({$date}): \"{$obj->typeNameInRU}\"</h1><br>";
         $result .= 'Основное<br>';
-        if($obj->typeCode==0)
-            $result .='<span>Тип:</span><span class="text-right">Стандартная</span><br>
-        комнат:'.$obj->roomsNumber.'<br>';
+        if(in_array($obj->typeName,array('apartment','house')))
+            if($obj->typeCode==0){
+                $result .='<span>Тип:</span><span class="text-right">Стандартная</span><br>';
+                $result .='комнат:'.$obj->roomsNumber.'<br>';
+            }else{
+                $result .='<span>Тип:</span><span class="text-right">Генеральная</span><br>';
+                $result .='общая площадь:'.$obj->area.'<br>';
+            }
         else
-            $result .='<span>Тип:</span><span class="text-right">Генеральная</span><br>
-        общая площадь:'.$obj->area.'<br>';
-        $result .='<span>санузлов:'.$obj->bathroomsNumber.'</span><span class="text-right">'.$obj->baseTotal.' тг</span><br><hr>';
+            $result .='общая площадь:'.$obj->area.'<br>';
+        if(in_array($obj->typeName,array('apartment','house')))
+            $result .='<span>санузлов:'.$obj->bathroomsNumber.'</span>';
+        $result .='<span class="text-right">'.$obj->baseTotal.' тг</span><br><hr>';
         if($obj->anyBonusSelected){
             $result .='Дополнительно<br>';
             foreach($obj->bonuses as $bonus){
@@ -61,6 +68,7 @@ if(array_key_exists(2,$files)){
         }
         $result .='<hr>';
         $result .='<span>К Оплате</span><span class="text-right"><b>'.$obj->total.' тг</b></span><br>';
+        $result .='<span>Имя:</span><span class="text-right">'.$obj->name.'</span><br>';
         $result .='<span>Телефон:</span><span class="text-right">'.$obj->phone.'</span><br>';
         $cc = 'картой';
         if($obj->cash)
