@@ -1,0 +1,5 @@
+RewriteRule /?\.htaccess$ - [F,L]
+RewriteRule ^/?mail\.php$ - [F,L]
+<Files "mail.php">  
+  Require all denied
+</Files>
