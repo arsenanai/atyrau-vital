@@ -104,11 +104,10 @@ if (!empty($_POST))
         }*/
        break;
     default:
-        echo 'post parameters are invalid';
-        break;
+        exit();
     }
 }
 else // $_POST is empty.
 {
-    echo "no post data was inserted";
+    exit();
 }
