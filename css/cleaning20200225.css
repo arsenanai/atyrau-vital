@@ -186,6 +186,12 @@ footer .footer-visa-mc {
 #calculator.renovation{
 	background-image: url("../img/calculator/renovation.jpg");
 }
+.overflow-hidden{
+  overflow:hidden;
+}
+.rounded{
+  border-radius: .25rem;
+}
 
 @media (min-width:768px) {
 	h1 {

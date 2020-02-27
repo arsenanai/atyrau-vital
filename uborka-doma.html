@@ -20,7 +20,6 @@
     [v-cloak]>*{display:none}[v-cloak]::before{content:"Загрузка…"}
   </style>
   <link rel="stylesheet" type="text/css" href="css/cleaning20200225.css">
-  <link href="css/freelancer-20200225.css" rel="stylesheet">
   <link rel="apple-touch-icon" sizes="180x180" href="img/favs/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="img/favs/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="img/favs/favicon-16x16.png">
@@ -402,40 +401,35 @@
         </div>
       </div>
     </section>
+    <hr>
     <footer>
         <div class="container my-5">
             <div class="row text-center text-md-left">
-                <div class="col-12">
-                    <hr>
-                </div>
                 <div class="col-12 col-md-4 mb-3">
                     © ТОО «AVGM LTD», 2020 </div>
                 <div class="col-12 col-md-4 mb-3">
                     <p class="mb-2">
                         г. Атырау Южная Пром Зона 4, РК
                     </p>
+                    
                     <ul class="list-unstyled">
                         <li class="list-item mb-2"><a class="text-success" :href="'mailto:'+emails[0]">{{emails[0]}}</a></li>
                         <li class="list-item mb-2"><a class="text-success" :href="'tel:'+phones[0]">{{formatPhoneNumber(phones[0])}}</a></li>
                     </ul>
-                </div>
-                <div class="col-12 col-md-4 mb-3">
-
-                    <ul class="list-unstyled">
-                        <!--<li class="list-item mb-2">
-                            <a class="text-success" href="/himchistka-mebeli-kovrov">Химчистка мягкой мебели и ковров в Алматы</a> </li>-->
-                        <!--<li class="list-item mb-2">
-                            <a class="text-success" href="">Оплата</a> </li>
-                        <li class="list-item mb-2">
-                            <a class="text-success" href="">Скидки и акции</a> </li>
-                        <li class="list-item mb-2">
-                            <a class="text-success" href="">Прайс-лист услуг</a> </li>
-                        <li class="list-item mb-2">
-                            <a class="text-success" href="">Отзывы и рекомендации</a> </li>-->
-                    </ul>
                     Принимаем карты
                     <br>
                     <img src="img/calculator/visa-mc.png" class="footer-visa-mc mt-1" alt="">
+                </div>
+                <div class="col-12 col-md-4 mb-3">
+                    <ul class="list-unstyled">
+                        <li class="list-item mb-2" 
+                          v-for="page in pages">
+                          <a 
+                            class="text-success"
+                            :href="getPageLink(page)">{{printOffer(page)}}</a>
+                        </li>
+                    </ul>
+                    
                 </div>
             </div>
         </div>
@@ -467,7 +461,6 @@
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
-  <script src="http://unpkg.com/portal-vue"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://www.google.com/recaptcha/api.js?render=6LfSR9oUAAAAAKCclvFZNhmokgzi4QGO8HdKKPDt"></script>
   <script src="js/cleaning.js"></script>

@@ -3,7 +3,7 @@ var app = new Vue({
     data: {
         showModal: !1,
         selectedPage: "house",
-        pages: ["house", "apartment", "office", "renovation"],
+        pages: ["house", "apartment", "office", "renovation","dryCleaning","payment"],
         russianPages: {
             house: "Дом",
             apartment: "Квартира",
@@ -30,7 +30,13 @@ var app = new Vue({
                 value: "Уборка после ремонта в квартирах, домах и офисах Атырау",
                 description: null,
                 withPrice: !1
-            }
+            },
+            dryCleaning: {
+                value: "Химчистка мебели и ковров",
+            },
+            payment:{
+                value: "Способы оплаты",
+            },
         },
         name: null,
         phone: null,
@@ -216,9 +222,19 @@ var app = new Vue({
         getPageType() {
             var e = "house",
                 t = window.location.pathname.split("/").pop();
-            return "uborka-kvartiry.html" == t ? e = "apartment" : "uborka-ofisa.html" == t ? e = "office" : "uborka-posle-remonta.html" == t && (e = "renovation"), e
+            return "uborka-kvartiry.html" == t ? e = "apartment" 
+            : "uborka-ofisa.html" == t ? e = "office" 
+            : "himchistka-mebeli-kovrov.html" == t ? e = "dryCleaning" 
+            : "oplata.html" == t ? e = "payment"
+            : "uborka-posle-remonta.html" == t && (e = "renovation"), 
+            e
         },
-        getPageLink: e => "apartment" == e ? "uborka-kvartiry.html" : "office" == e ? "uborka-ofisa.html" : "renovation" == e ? "uborka-posle-remonta.html" : "uborka-doma.html",
+        getPageLink: e => "apartment" == e ? "uborka-kvartiry.html" 
+        : "office" == e ? "uborka-ofisa.html" 
+        : "renovation" == e ? "uborka-posle-remonta.html" 
+        : "dryCleaning" == e ? "himchistka-mebeli-kovrov.html"
+        : "payment" == e ? "oplata.html"
+        : "uborka-doma.html",
         anyBonusSelected: function() {
             for (var e, t = !1, a = 0; a < this.bonuses[this.selectedType].length; a++)
                 if ("number" == (e = this.bonuses[this.selectedType][a]).type && e.value > 0 || "boolean" == e.type && 1 == e.value) {
