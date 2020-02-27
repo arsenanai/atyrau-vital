@@ -326,5 +326,6 @@ var app = new Vue({
         	this.selectedType=1
         	this.area=50
         }
+        document.title = this.printOffer(this.selectedPage) + " - AVGM LTD"
     }
 });
