@@ -329,7 +329,7 @@ var app = new Vue({
         document.title = this.printOffer(this.selectedPage) + " - AVGM LTD"
         var meta = document.createElement('meta');
         meta.name = "description";
-        meta.content = this.printOffer(this.selectedPage)+". ☎ "+this.formatPhoneNumber(this.phones[0]);
+        meta.content = this.printOffer(this.selectedPage)+". 📞 "+this.formatPhoneNumber(this.phones[0]);
         document.getElementsByTagName('head')[0].appendChild(meta);
     }
 });
