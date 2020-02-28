@@ -331,5 +331,9 @@ var app = new Vue({
         meta.name = "description";
         meta.content = this.printOffer(this.selectedPage)+". 📞 "+this.formatPhoneNumber(this.phones[0]);
         document.getElementsByTagName('head')[0].appendChild(meta);
+        meta = document.createElement('meta');
+        meta.name = "keywords";
+        meta.content = "уборка,клининг,Атырау,"+this.russianPages(this.selectedPage);
+        document.getElementsByTagName('head')[0].appendChild(meta);
     }
 });
