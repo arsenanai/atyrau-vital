@@ -326,14 +326,14 @@ var app = new Vue({
         	this.selectedType=1
         	this.area=50
         }
-        document.title = this.printOffer(this.selectedPage) + " - AVGM LTD"
-        var meta = document.createElement('meta');
+        //document.title = this.printOffer(this.selectedPage) + " - AVGM LTD"
+        /*var meta = document.createElement('meta');
         meta.name = "description";
         meta.content = this.printOffer(this.selectedPage)+". 📞 "+this.formatPhoneNumber(this.phones[0]);
         document.getElementsByTagName('head')[0].appendChild(meta);
         meta = document.createElement('meta');
         meta.name = "keywords";
         meta.content = "уборка,клининг,Атырау,"+this.russianPages(this.selectedPage);
-        document.getElementsByTagName('head')[0].appendChild(meta);
+        document.getElementsByTagName('head')[0].appendChild(meta);*/
     }
 });
