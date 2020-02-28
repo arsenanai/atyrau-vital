@@ -3,6 +3,9 @@ require 'phpmailer/vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+$testing = true;
+$httpdocs = ($testing==false)?'httpdocs':'';
+
 function getBody($obj,$date){
     $result = "
     <!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
@@ -53,7 +56,7 @@ function getBody($obj,$date){
     return $result;
 }
 function operate(){
-    $directory = getcwd().DIRECTORY_SEPARATOR."httpdocs".DIRECTORY_SEPARATOR."requests".DIRECTORY_SEPARATOR;
+    $directory = getcwd().DIRECTORY_SEPARATOR.$GLOBALS['httpdocs'].DIRECTORY_SEPARATOR."requests".DIRECTORY_SEPARATOR;
     $files = scandir ($directory);
     if(array_key_exists(2,$files)){
         $firstFile = $directory . $files[2];
@@ -79,7 +82,7 @@ function operate(){
 
                 //Recipients
                 $mail->setFrom('manager@avgmltd.com', 'Заявка Клининг');
-                $mail->addAddress('manager@avgmltd.com', 'Manager Avgm');     // Add a recipient
+                $mail->addAddress('avgmclean@mail.ru', 'Cleaning Manager');     // Add a recipient
                 $mail->CharSet = 'UTF-8';
                 // Content
                 $mail->isHTML(true);                                  // Set email format to HTML
@@ -102,16 +105,22 @@ function operate(){
 
 $now = time();
 $after = strtotime("+59 minutes");
+$c = 0;
 while($now<$after){
     $result = operate();
     if($result==-1){
         //no files
-        break;
+        $c++;
+        if($c>120)
+            break;
+        if($testing)
+            echo 'waiting for 30 seconds'.PHP_EOL;
+        sleep(30);
     }else if($result==1){
         //success
     }else{
         //exception
-        file_put_contents(getcwd().DIRECTORY_SEPARATOR."httpdocs".DIRECTORY_SEPARATOR.'errors.log',$result);
+        file_put_contents(getcwd().DIRECTORY_SEPARATOR.$httpdocs.DIRECTORY_SEPARATOR.'errors.log',$result);
     }
     $now = time();
 }
