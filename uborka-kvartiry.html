@@ -34,9 +34,9 @@
   <div id="app" v-cloak>
     <header class="hero text-left py-0" :style="'background-image: url(img/calculator/'+selectedPage+'.jpg)'">
       <div class="w-100 h-100 filter-light">
-        <nav class="navbar navbar-expand-lg text-uppercase navbar-light bg-transparent">
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
           <div class="container">
-            <a class="navbar-brand font-italic font-weight-bold text-capitalize text-dark" href="/">AVGM LTD</a>
+            <a class="navbar-brand font-italic font-weight-bold text-dark" href="cleaning.html">Сервис и Услуги</a>
             <ul class="navbar-nav ml-auto">
               <li class="nav-item mx-0 mx-lg-1 py-0">
                 <a class="nav-link p-0 px-lg-3 rounded" :href="'tel:'+phones[0]">
@@ -274,15 +274,15 @@
                               <label for="phone">Телефон</label>
                               <input type="tel" v-model="phone" required="required" class="form-control">
                           </div>
-                          <div class="col-12 mb-3">
+                          <!--<div class="col-12 mb-3">
                               <label for="card">Оплата</label>
                               <div class="btn-group w-100" role="group" aria-label="">
-                                <!--<button type="button" class="btn btn-outline-success"
-                                  :class="{active: cash==false}" @click="cash=false">Картой</button>-->
+                                <button type="button" class="btn btn-outline-success"
+                                  :class="{active: cash==false}" @click="cash=false">Картой</button>
                                 <button type="button" class="btn btn-outline-success"
                                   :class="{active: cash==true}" @click="cash=true">Наличными</button>
                               </div>
-                          </div>
+                          </div>-->
                           <div class="col-12">
                             <button type="submit" class="btn btn-primary w-100"
                              @click="submitRequest" :disabled="phoneIsEmpty()==true">
@@ -417,9 +417,9 @@
                         <li class="list-item mb-2"><a class="text-success" :href="'mailto:'+emails[0]">{{emails[0]}}</a></li>
                         <li class="list-item mb-2"><a class="text-success" :href="'tel:'+phones[0]">{{formatPhoneNumber(phones[0])}}</a></li>
                     </ul>
-                    Принимаем карты
-                    <br>
-                    <img src="img/calculator/visa-mc.png" class="footer-visa-mc mt-1" alt="">
+                    <!--Принимаем карты
+                    <br>-->
+                    <!--<img src="img/calculator/visa-mc.png" class="footer-visa-mc mt-1" alt="">-->
                 </div>
                 <div class="col-12 col-md-4 mb-3">
                     <ul class="list-unstyled">
