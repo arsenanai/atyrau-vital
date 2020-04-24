@@ -11,16 +11,11 @@
 
   <title>Услуги клининга в Атырау</title>
 
-  <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Custom fonts for this template -->
   <link href="css/fa/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Roboto|Rubik&display=swap&subset=cyrillic" rel="stylesheet">
-  <!-- Plugin CSS -->
   <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
-
-  <!-- Custom styles for this template -->
   <link href="css/freelancer-20200225.css" rel="stylesheet">
   <link rel="apple-touch-icon" sizes="180x180" href="img/favs/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="img/favs/favicon-32x32.png">
@@ -34,7 +29,6 @@
 
 <body id="page-top">
   <div id="app">
-    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top bg-navbar" id="mainNav">
       <div class="container">
         <a class="navbar-brand font-italic font-weight-bold" href="/">Сервис и Услуги</a>

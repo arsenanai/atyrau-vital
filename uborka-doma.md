@@ -8,14 +8,14 @@
   <meta name="author" content="">
   <meta name="google-site-verification" content="N973lsxBSqpq2NMYliXCc1w5FJR4Uo2ckU5B0QgZ84w" />
 
-  <title>Уборка квартир, домов, офисов после ремонта в Атырау - AVGM LTD</title>
+  <title>Уборка домов в Атырау от 9000тг - AVGM LTD</title>
 
-  <!-- Bootstrap core CSS -->
+  
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-  <!-- Custom fonts for this template -->
+  
   <link href="https://fonts.googleapis.com/css?family=Roboto|Rubik&display=swap&subset=cyrillic" rel="stylesheet">
-  <!-- Custom styles for this template -->
+  
   <style type="text/css">
     [v-cloak]>*{display:none}[v-cloak]::before{content:"Загрузка…"}
   </style>
@@ -27,12 +27,7 @@
   <link rel="mask-icon" href="img/favs/safari-pinned-tab.svg" color="#1b5e20">
   <meta name="msapplication-TileColor" content="#3147d0">
   <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="Вымоем окна снаружи и внутри
-Очистим поверхности от загрязнений, следов клея, побелки, лаков и красок
-Отмоем радиаторы, трубы и двери
-Вымоем стены и полы
-Очистим помещение от пыли с помощью промышленного пылесоса
-Соберем и вынесем строительный мусор">
+  <meta name="description" content="Уборка частных домов клининговой компанией в Атырау. Генеральная, повседневная уборка без выходных и в вечернее время. Скидки на услуги.">
 </head>
 
 <body id="page-top">
@@ -64,10 +59,10 @@
             <div class="col-xl-10 col-lg-10 col-md-12 my-4 py-4">
               <div class="offer-container my-4 py-4">
                 <h1 class="mt-4 pt-4">
-                  Уборка после ремонта в квартирах, домах и офисах в Атырау
+                  Уборка домов в Атырау от 9000 тг
                 </h1>
                 <h6 class="w-50" v-if="offers[selectedPage].description">
-                  {{offers[selectedPage].description}}
+                  Профессиональная генеральная уборка по стоимости частной домработницы
                 </h6>
                 <br>
                 <a class="btn btn-success shine" href="#calculator">
