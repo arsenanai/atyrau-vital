@@ -1,6 +1,6 @@
 <?php
 
-$testing = false;
+$testing = true;
 function getRealIPAddr()
 {
    //check ip from share internet
